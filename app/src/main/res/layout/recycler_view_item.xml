@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+  <ImageView
+      android:id="@+id/iv_icon"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:src="@mipmap/icon_notice"
+      app:layout_constraintStart_toStartOf="parent"
+      android:layout_marginStart="@dimen/dp15"
+      app:layout_constraintTop_toTopOf="parent"
+      android:layout_marginTop="@dimen/dp20" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp15"
+        android:layout_marginTop="@dimen/dp20"
+        android:textColor="@color/c2color"
+        android:textStyle="bold"
+        android:textSize="@dimen/s2textsize"
+        app:layout_constraintStart_toEndOf="@+id/iv_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@tools:sample/full_names" />
+
+  <TextView
+      android:id="@+id/tv_content"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@color/c3color"
+      android:textSize="@dimen/s2textsize"
+      tools:text="@tools:sample/lorem[4:10]"
+      app:layout_constraintTop_toBottomOf="@+id/tv_title"
+      app:layout_constraintStart_toEndOf="@+id/iv_icon"
+      android:layout_marginStart="@dimen/dp15"
+      android:layout_marginEnd="@dimen/dp15"
+       />
+
+  <TextView
+      android:id="@+id/tv_time"
+      android:layout_width="wrap_content"
+      android:textSize="@dimen/s5textsize"
+      android:textColor="@color/c4color"
+      android:layout_height="wrap_content"
+      tools:text="@tools:sample/date/hhmm"
+      app:layout_constraintBaseline_toBaselineOf="@+id/tv_title"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:layout_marginEnd="@dimen/dp15" />
+
+    <TextView
+        android:id="@+id/tv_view_video"
+        android:layout_width="wrap_content"
+        android:textColor="@color/c1color"
+        app:layout_constraintStart_toEndOf="@+id/iv_icon"
+        android:layout_marginStart="@dimen/dp15"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content"
+        android:layout_marginTop="@dimen/dp13"
+        android:textSize="@dimen/s2textsize"
+        android:text="@string/view_video"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="wrap_content"
+        android:background="@color/c5color"
+        app:layout_constraintStart_toEndOf="@+id/iv_icon"
+        app:layout_constraintTop_toBottomOf="@+id/tv_view_video"
+        android:layout_marginStart="@dimen/dp15"
+        android:layout_marginTop="@dimen/dp20"
+        android:layout_height="@dimen/dp0_5"/>
+
+</android.support.constraint.ConstraintLayout>

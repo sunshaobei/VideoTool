@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ccee.videotool"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="18"
+        android:targetSdkVersion="27" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/> -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" /> <!-- 摄像头权限 -->
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <application
+        android:name="com.ccee.videotool.CCEEVideoToolApplication"
+        android:allowBackup="true"
+        android:debuggable="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.ccee.videotool.view.activity.MainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_Transition_Slide_Bottom"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.ccee.videotool.view.activity.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_Transition_Slide_Bottom" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.ccee.videotool.view.activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_Transition_Slide_Bottom" />
+        <activity
+            android:name="com.ccee.videotool.view.activity.SysSettingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_Transition_Slide_Bottom" />
+        <activity
+            android:name="com.ccee.videotool.view.activity.AuditNoticeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_Transition_Slide_Bottom" />
+        <activity
+            android:name="com.aliyun.demo.snap.SnapCropSetting"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+            <intent-filter>
+                <action android:name="com.aliyun.action.snapcrop" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.aliyun.demo.snap.SnapRecorderSetting"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+            <intent-filter>
+                <action android:name="com.aliyun.action.snaprecorder" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity> <!-- 导入相册选择界面相关的Activity -->
+        <activity
+            android:name="com.aliyun.demo.crop.MediaActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AliyunVideoUIStytle" >
+            <intent-filter>
+                <action android:name="com.aliyun.action.crop" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.duanqu.qupai.action.crop" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity> <!-- 裁剪视频相关的Activity -->
+        <activity
+            android:name="com.aliyun.demo.crop.AliyunVideoCrop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AliyunVideoUIStytle" >
+        </activity> <!-- 录制视频相关的Activity -->
+        <activity
+            android:name="com.aliyun.demo.recorder.AliyunVideoRecorder"
+            android:screenOrientation="portrait"
+            android:theme="@style/AliyunVideoUIStytle" >
+            <intent-filter>
+                <action android:name="com.aliyun.action.recorder" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.duanqu.qupai.action.recorder" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.aliyun.vodplayerview.activity.AliyunPlayerSettingActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.aliyun.vodplayerview.activity.AliyunPlayerSkinActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
+            <intent-filter>
+                <action android:name="com.aliyun.vodplayerview.activity.player" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.google.zxing.activity.CaptureActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <meta-data
+            android:name="android.support.VERSION"
+            android:value="26.1.0" />
+
+        <service
+            android:name="com.liulishuo.filedownloader.services.FileDownloadService"
+            android:process=":filedownloader" />
+
+        <activity android:name="com.aliyun.nativecrash.NativeCrashActivity" />
+        <activity
+            android:name="com.aliyun.quhelp.AliyunHelperActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.duanqu.qupai.action.help" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.aliyun.quhelp.CopyRightActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.aliyun.demo.recorder.CameraDemo"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            <intent-filter>
+                <action android:name="com.duanqu.qupai.action.camera" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.aliyun.demo.recorder.RecorderSettingTest"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.duanqu.qupai.action.recorder.setting" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.aliyun.demo.recorder.VideoPlayActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.aliyun.demo.recorder.MusicActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.aliyun.demo.crop.CropSettingTest"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+            <intent-filter>
+                <action android:name="com.duanqu.qupai.action.crop.setting" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.aliyun.demo.crop.AliyunImageCrop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AliyunVideoUIStytle" >
+        </activity>
+
+        <meta-data
+            android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
+            android:value="GlideModule" />
+        <meta-data
+            android:name="android.arch.lifecycle.VERSION"
+            android:value="27.0.0-SNAPSHOT" />
+    </application>
+
+</manifest>

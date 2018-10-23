@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- 果园字体颜色 -->
+    <color name="c1color">#FE6D00</color>
+    <color name="c2color">#333333</color>
+    <color name="c3color">#666666</color>
+    <color name="c4color">#999999</color>
+    <color name="c5color">#D8D8D8</color>
+    <color name="c6color">#F7F7F7</color>
+    <color name="c7color">#FFFFFF</color>
+
+</resources>

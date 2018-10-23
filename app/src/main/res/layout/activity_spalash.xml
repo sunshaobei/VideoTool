@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.ccee.videotool.model.data.SplashData" />
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/aliyun_black"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/dp0"
+            android:layout_alignParentRight="true"
+            android:onClick="jump"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/dp15"
+            android:background="@drawable/shape_solidgray_corner20"
+            android:paddingBottom="@dimen/dp5"
+            android:paddingLeft="@dimen/dp8"
+            android:paddingRight="@dimen/dp8"
+            android:paddingTop="@dimen/dp5"
+            android:text="@{data.countDown}"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+</layout>

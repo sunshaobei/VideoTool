@@ -1,0 +1,13 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/c1color</item>
+        <item name="android:windowEnterAnimation">@anim/activity_swipeback_enter</item>
+        <item name="android:windowExitAnimation">@anim/activity_swipeback_exit</item>
+    </style>
+
+</resources>

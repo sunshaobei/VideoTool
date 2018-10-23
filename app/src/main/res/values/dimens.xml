@@ -1,0 +1,12 @@
+<resources>
+    <integer name="anim_duration_long">500</integer>
+    <dimen name="s1textsize">16sp</dimen>
+    <dimen name="s2textsize">15sp</dimen>
+    <dimen name="s3textsize">14sp</dimen>
+    <dimen name="s4textsize">13sp</dimen>
+    <dimen name="s5textsize">12sp</dimen>
+    <dimen name="s6textsize">11sp</dimen>
+    <dimen name="s7textsize">25sp</dimen>
+    <dimen name="s8textsize">20sp</dimen>
+    <dimen name="s9textsize">9sp</dimen>
+</resources>

@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "C:\\Users\\sunsh\\Desktop\\VideoTool\\gradle-build\\lib_common\\intermediates\\res\\merged\\debug\\drawable-v21\\abc_btn_colored_material.xml",
+        "source": "C:\\Users\\sunsh\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.2.1.aar\\9649cc2323e6bafbf1ec0cabd24ce283\\res\\drawable-v21\\abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\sunsh\\Desktop\\VideoTool\\gradle-build\\lib_common\\intermediates\\res\\merged\\debug\\drawable-v21\\abc_edit_text_material.xml",
+        "source": "C:\\Users\\sunsh\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.2.1.aar\\9649cc2323e6bafbf1ec0cabd24ce283\\res\\drawable-v21\\abc_edit_text_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\sunsh\\Desktop\\VideoTool\\gradle-build\\lib_common\\intermediates\\res\\merged\\debug\\drawable-v21\\notification_action_background.xml",
+        "source": "C:\\Users\\sunsh\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\4dfbb19e9dba1a73044130f612e9cd00\\res\\drawable-v21\\notification_action_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\sunsh\\Desktop\\VideoTool\\gradle-build\\lib_common\\intermediates\\res\\merged\\debug\\drawable-v21\\abc_action_bar_item_background_material.xml",
+        "source": "C:\\Users\\sunsh\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.2.1.aar\\9649cc2323e6bafbf1ec0cabd24ce283\\res\\drawable-v21\\abc_action_bar_item_background_material.xml"
+    }
+]

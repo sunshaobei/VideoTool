@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sunsh.baselibrary.widgets.overscroll.OverScrollLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.SysSettingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/c6color"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:textColor="@color/c2color"
+                android:padding="@dimen/dp15"
+                android:text="@string/user_agreement2"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:drawableRight="@mipmap/icon_more"
+                android:textSize="@dimen/s2textsize"
+                android:layout_height="@dimen/dp55" />
+            <View
+                android:layout_width="match_parent"
+                android:background="@color/c5color"
+                android:layout_height="@dimen/dp0_5"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:background="?attr/selectableItemBackground"
+                android:layout_height="@dimen/dp55">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="@dimen/s2textsize"
+                    android:padding="@dimen/dp15"
+                    android:text="@string/wipe_cache"
+                    android:textColor="@color/c2color"
+                    android:layout_height="@dimen/dp55" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/c2color"
+                    android:padding="@dimen/dp15"
+                    android:gravity="center_vertical"
+                    android:drawableRight="@mipmap/icon_more"
+                    android:textSize="@dimen/s2textsize"
+                    android:layout_height="@dimen/dp55" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:background="@color/c5color"
+                android:layout_height="@dimen/dp0_5"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:background="?attr/selectableItemBackground"
+                android:layout_height="@dimen/dp55">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="@dimen/s2textsize"
+                    android:padding="@dimen/dp15"
+                    android:text="@string/current_version"
+                    android:textColor="@color/c2color"
+                    android:layout_height="@dimen/dp55" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/c2color"
+                    android:padding="@dimen/dp15"
+                    android:text="v1.0.0"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/s2textsize"
+                    android:layout_height="@dimen/dp55" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.sunsh.baselibrary.widgets.overscroll.OverScrollLayout>
