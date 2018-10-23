@@ -1,5 +1,6 @@
 package com.ccee.videotool.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -46,8 +47,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     public void goCamera(View view) {
-//        startActivity(new Intent(this,SnapRecorderSetting.class));
-        SnapRecorderSetting.startRecordForResult(this, 11);
+        startActivity(new Intent(this,SnapRecorderSetting.class));
+//        SnapRecorderSetting.startRecordForResult(this, 11);
     }
 
     public void videoLib(View view) {
