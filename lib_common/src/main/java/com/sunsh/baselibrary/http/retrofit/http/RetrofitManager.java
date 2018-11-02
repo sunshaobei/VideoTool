@@ -64,7 +64,7 @@ public class RetrofitManager {
      * @param <T>      api service
      * @return
      */
-    private static <T> T initService(Class<T> clazz) {
+    public static <T> T initService(Class<T> clazz) {
         return getInstence().create(clazz);
     }
 

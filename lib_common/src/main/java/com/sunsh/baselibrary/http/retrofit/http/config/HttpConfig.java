@@ -8,5 +8,5 @@ package com.sunsh.baselibrary.http.retrofit.http.config;
 public interface HttpConfig {
      int HTTP_TIME=3;
      int HTTP_TIME_OUT=15;
-     String BASE_URL="http://apptest.cifnews.com/";
+     String BASE_URL="http://172.16.15.87:9001/";
 }

@@ -144,6 +144,7 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
     private OnShowMoreClickListener mOnShowMoreClickListener;
     private ImageView mScreenShot;
     private ImageView mScreenRecorder;
+    private TextView mBtnQuality;
 
     public ControlView(Context context) {
         super(context);
@@ -189,6 +190,7 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
         mLargeDurationText = (TextView) findViewById(R.id.alivc_info_large_duration);
         mLargeSeekbar = (SeekBar) findViewById(R.id.alivc_info_large_seekbar);
         mLargeChangeQualityBtn = (Button) findViewById(R.id.alivc_info_large_rate_btn);
+        mBtnQuality = (TextView) findViewById(R.id.btn_quality);
 
 
         mSmallInfoBar = findViewById(R.id.alivc_info_small_bar);
@@ -310,6 +312,15 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
                 }
             }
         });
+        mBtnQuality.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //点击切换分辨率 显示分辨率的对话框
+                if (mOnQualityBtnClickListener != null && mAliyunMediaInfo != null) {
+                    mOnQualityBtnClickListener.onQualityBtnClick(v, mAliyunMediaInfo.getQualities(), mCurrentQuality);
+                }
+            }
+        });
 
         // 更多按钮点击监听
         mTitleMore.setOnClickListener(new OnClickListener() {
@@ -394,11 +405,11 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
      * 更新下载按钮的显示和隐藏
      */
     public void updateDownloadBtn() {
-        if (mAliyunScreenMode == AliyunScreenMode.Full || "localSource".equals(PlayParameter.PLAY_PARAM_TYPE)) {
-            mTitleDownload.setVisibility(GONE);
-        } else if (mAliyunScreenMode == AliyunScreenMode.Small || "vidsts".equals(PlayParameter.PLAY_PARAM_TYPE)){
-            mTitleDownload.setVisibility(VISIBLE);
-        }
+//        if (mAliyunScreenMode == AliyunScreenMode.Full || "localSource".equals(PlayParameter.PLAY_PARAM_TYPE)) {
+//            mTitleDownload.setVisibility(GONE);
+//        } else if (mAliyunScreenMode == AliyunScreenMode.Small || "vidsts".equals(PlayParameter.PLAY_PARAM_TYPE)){
+//            mTitleDownload.setVisibility(VISIBLE);
+//        }
     }
 
     /**
@@ -427,13 +438,13 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
      *  更新更多按钮的显示和隐藏
      */
     private void updateShowMoreBtn() {
-        if (mAliyunScreenMode == AliyunScreenMode.Full) {
-            mTitleMore.setVisibility(VISIBLE);
-            mTitleDownload.setVisibility(GONE);
-        } else {
-            mTitleMore.setVisibility(GONE);
-            mTitleDownload.setVisibility(VISIBLE);
-        }
+//        if (mAliyunScreenMode == AliyunScreenMode.Full) {
+//            mTitleMore.setVisibility(VISIBLE);
+//            mTitleDownload.setVisibility(GONE);
+//        } else {
+//            mTitleMore.setVisibility(GONE);
+//            mTitleDownload.setVisibility(VISIBLE);
+//        }
     }
 
     /**
@@ -475,7 +486,7 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
     }
 
     public void hideMoreButton() {
-        mTitleMore.setVisibility(GONE);
+//        mTitleMore.setVisibility(GONE);
     }
 
 
@@ -582,6 +593,11 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
             mLargeChangeQualityBtn.setText(QualityItem.getItem(getContext(), mCurrentQuality, isMtsSource).getName());
             mLargeChangeQualityBtn.setVisibility(mForceQuality ? GONE : VISIBLE);
         }
+        if (mBtnQuality != null) {
+            VcPlayerLog.d(TAG, "mCurrentQuality = " + mCurrentQuality + " , isMts Source = " + isMtsSource + " , mForceQuality = " + mForceQuality);
+            mBtnQuality.setText(QualityItem.getItem(getContext(), mCurrentQuality, isMtsSource).getName());
+            mBtnQuality.setVisibility(mForceQuality ? GONE : VISIBLE);
+        }
     }
 
     /**
@@ -671,6 +687,7 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
                 mLargePositionText.setText(TimeFormater.formatMs(mVideoPosition));
             }
             mLargeChangeQualityBtn.setText(QualityItem.getItem(getContext(), mCurrentQuality, isMtsSource).getName());
+            mBtnQuality.setText(QualityItem.getItem(getContext(), mCurrentQuality, isMtsSource).getName());
 
             //然后再显示出来。
             mLargeInfoBar.setVisibility(VISIBLE);
@@ -709,7 +726,7 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
             mScreenLockBtn.setVisibility(GONE);
             mScreenRecorder.setVisibility(GONE);
             mScreenShot.setVisibility(GONE);
-            mTitleMore.setVisibility(GONE);
+//            mTitleMore.setVisibility(GONE);
         }
     }
 
@@ -962,8 +979,7 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
         void showMore();
     }
 
-    public void setOnShowMoreClickListener(
-        OnShowMoreClickListener listener) {
+    public void setOnShowMoreClickListener(OnShowMoreClickListener listener) {
         this.mOnShowMoreClickListener = listener;
     }
 }

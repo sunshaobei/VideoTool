@@ -4,10 +4,18 @@
 
 package com.ccee.videotool.view.activity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -17,7 +25,10 @@ import com.ccee.videotool.databinding.ActivitySpalashBinding;
 import com.ccee.videotool.model.data.SplashData;
 import com.sunsh.baselibrary.base.activity.BaseActivity;
 import com.sunsh.baselibrary.utils.PermissionUtils;
+import com.sunsh.baselibrary.utils.sp.SpKey;
+import com.sunsh.baselibrary.utils.sp.SpUtil;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -42,6 +53,11 @@ public class SplashActivity extends BaseActivity implements Handler.Callback, Ba
     private ActivitySpalashBinding binding;
 
     @Override
+    protected boolean needCustomStatusbar() {
+        return false;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         int systemUiVisibility = getWindow().getDecorView().getSystemUiVisibility();
@@ -52,7 +68,9 @@ public class SplashActivity extends BaseActivity implements Handler.Callback, Ba
                 , PermissionUtils.PermissionEnum.EXTERNAL_STORAGE.permission()
                 , PermissionUtils.PermissionEnum.READ_EXTERNAL_STORAGE.permission()
                 , PermissionUtils.PermissionEnum.CAMERA.permission()
-                , PermissionUtils.PermissionEnum.PHONE.permission());
+                , PermissionUtils.PermissionEnum.PHONE.permission()
+                , PermissionUtils.PermissionEnum.LOCATION.permission()
+        );
     }
 
     private void initData() {
@@ -69,7 +87,7 @@ public class SplashActivity extends BaseActivity implements Handler.Callback, Ba
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
             case JUMP_TO_MAIN:
-                if ((int) msg.obj == -1) {
+                if ((int) msg.obj == 0) {
                     jump2Main();
                 } else {
                     binding.getData().countDown.set(String.format("跳过 %s s", msg.obj.toString()));
@@ -107,6 +125,26 @@ public class SplashActivity extends BaseActivity implements Handler.Callback, Ba
     public void permissionAllow() {
         initData();
         countDown();
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        List<String> list = locationManager.getProviders(true);
+        if (list.contains(LocationManager.GPS_PROVIDER)) {
+            //是否为GPS位置控制器
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (location != null) {
+                SpUtil.getInstance().putString(SpKey.LONGITUDE, String.valueOf(location.getLongitude()));
+                SpUtil.getInstance().putString(SpKey.LATITUDE, String.valueOf(location.getLatitude()));
+            }
+        } else if (list.contains(LocationManager.NETWORK_PROVIDER)) {
+            //是否为网络位置控制器
+            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            if (location != null) {
+                SpUtil.getInstance().putString(SpKey.LONGITUDE, String.valueOf(location.getLongitude()));
+                SpUtil.getInstance().putString(SpKey.LATITUDE, String.valueOf(location.getLatitude()));
+            }
+        }
     }
 
     @Override

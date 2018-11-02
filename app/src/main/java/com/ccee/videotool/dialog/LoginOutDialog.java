@@ -10,6 +10,7 @@ import com.alibaba.android.arouter.facade.callback.NavigationCallback;
 import com.ccee.videotool.R;
 import com.ccee.videotool.arouter.Arouter;
 import com.ccee.videotool.arouter.RoutePath;
+import com.sunsh.baselibrary.utils.sp.SpUtil;
 import com.sunsh.baselibrary.widgets.swipeback.StackManager;
 
 public class LoginOutDialog extends VideoToolDialog {
@@ -21,6 +22,7 @@ public class LoginOutDialog extends VideoToolDialog {
     protected void initView() {
         super.initView();
         setPositive(getContext().getResources().getString(R.string.confirm),v->{
+            SpUtil.getInstance().clearSp4LoginOut();
             Arouter.greenNavigationWithOption(RoutePath.LOGIN, new NavigationCallback() {
 
                 @Override

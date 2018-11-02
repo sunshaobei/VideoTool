@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.ccee.videotool.R;
 import com.sunsh.baselibrary.base.dialog.BaseDialog;
 
-public abstract class VideoToolDialog extends BaseDialog {
+public class VideoToolDialog extends BaseDialog {
 
     public VideoToolDialog(@NonNull Context context) {
         super(context);

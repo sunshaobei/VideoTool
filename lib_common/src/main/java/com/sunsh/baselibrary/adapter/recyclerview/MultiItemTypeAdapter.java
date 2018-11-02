@@ -2,11 +2,17 @@ package com.sunsh.baselibrary.adapter.recyclerview;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.sunsh.baselibrary.R;
 import com.sunsh.baselibrary.adapter.recyclerview.base.ItemViewDelegate;
 import com.sunsh.baselibrary.adapter.recyclerview.base.ItemViewDelegateManager;
+import com.sunsh.baselibrary.adapter.recyclerview.base.OnItemClickListener;
+import com.sunsh.baselibrary.adapter.recyclerview.base.OnItemLongClickListener;
 import com.sunsh.baselibrary.adapter.recyclerview.base.ViewHolder;
 
 import java.util.List;
@@ -20,18 +26,25 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
 
     protected ItemViewDelegateManager mItemViewDelegateManager;
     protected OnItemClickListener mOnItemClickListener;
+    private OnItemLongClickListener onItemLongClickListener;
+    private final EmptyItemViewDelegate emptyItemViewDelegate;
+    private boolean enableShowEmpty;
 
 
     public MultiItemTypeAdapter(Context context, List<T> datas) {
         mContext = context;
         mDatas = datas;
         mItemViewDelegateManager = new ItemViewDelegateManager();
+        emptyItemViewDelegate = new EmptyItemViewDelegate(mDatas);
+        addItemViewDelegate(emptyItemViewDelegate);
     }
 
     @Override
     public int getItemViewType(int position) {
         if (!useItemViewDelegateManager()) return super.getItemViewType(position);
-        return mItemViewDelegateManager.getItemViewType(mDatas.get(position), position);
+        if (position < mDatas.size())
+            return mItemViewDelegateManager.getItemViewType(mDatas.get(position), position);
+        else return mItemViewDelegateManager.getItemViewType(null, position);
     }
 
 
@@ -40,12 +53,12 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         ItemViewDelegate itemViewDelegate = mItemViewDelegateManager.getItemViewDelegate(viewType);
         int layoutId = itemViewDelegate.getItemViewLayoutId();
         ViewHolder holder = ViewHolder.createViewHolder(mContext, parent, layoutId);
-        onViewHolderCreated(holder,holder.getConvertView());
+        onViewHolderCreated(holder, holder.getConvertView());
         setListener(parent, holder, viewType);
         return holder;
     }
 
-    public void onViewHolderCreated(ViewHolder holder, View itemView){
+    public void onViewHolderCreated(ViewHolder holder, View itemView) {
 
     }
 
@@ -64,14 +77,16 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         viewHolder.getConvertView().setOnClickListener(v -> {
             if (mOnItemClickListener != null) {
                 int position = viewHolder.getAdapterPosition();
-                mOnItemClickListener.onItemClick(v, viewHolder , position);
+                if (position < mDatas.size())
+                    mOnItemClickListener.onItemClick(mDatas.get(position), viewHolder, position);
             }
         });
 
         viewHolder.getConvertView().setOnLongClickListener(v -> {
-            if (mOnItemClickListener != null) {
+            if (onItemLongClickListener != null) {
                 int position = viewHolder.getAdapterPosition();
-                return mOnItemClickListener.onItemLongClick(v, viewHolder, position);
+                if (position < mDatas.size())
+                    return onItemLongClickListener.onItemLongClick(mDatas.get(position), viewHolder, position);
             }
             return false;
         });
@@ -79,13 +94,13 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        convert(holder, mDatas.get(position));
+        convert(holder, position < mDatas.size() ? mDatas.get(position) : null);
     }
 
     @Override
     public int getItemCount() {
         int itemCount = mDatas.size();
-        return itemCount;
+        return itemCount == 0 ? (enableShowEmpty ? 1 : 0) : itemCount;
     }
 
 
@@ -107,13 +122,17 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         return mItemViewDelegateManager.getItemViewDelegateCount() > 0;
     }
 
-    public interface OnItemClickListener {
-        void onItemClick(View view, RecyclerView.ViewHolder holder, int position);
-
-        boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position);
-    }
-
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.mOnItemClickListener = onItemClickListener;
+    }
+
+    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
+        this.onItemLongClickListener = onItemLongClickListener;
+    }
+
+    public void setEmptyView(String text, int resid) {
+        enableShowEmpty = true;
+        emptyItemViewDelegate.setText(text);
+        emptyItemViewDelegate.setImage(resid);
     }
 }

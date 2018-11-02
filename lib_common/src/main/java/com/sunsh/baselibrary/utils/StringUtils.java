@@ -1,5 +1,6 @@
 package com.sunsh.baselibrary.utils;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.text.Html;
 import android.widget.TextView;
@@ -78,7 +79,7 @@ public class StringUtils {
      * @return
      */
     public static String nullStrToEmpty(Object str) {
-        return (str == null ? "" : (str instanceof String ? (String)str : str.toString()));
+        return (str == null ? "" : (str instanceof String ? (String) str : str.toString()));
     }
 
     /**
@@ -169,10 +170,10 @@ public class StringUtils {
      *
      * @param href
      * @return <ul>
-     *         <li>if href is null, return ""</li>
-     *         <li>if not match regx, return source</li>
-     *         <li>return the last string that match regx</li>
-     *         </ul>
+     * <li>if href is null, return ""</li>
+     * <li>if not match regx, return source</li>
+     * <li>return the last string that match regx</li>
+     * </ul>
      */
     public static String getHrefInnerHtml(String href) {
         if (isEmpty(href)) {
@@ -235,7 +236,7 @@ public class StringUtils {
                 // } else if (source[i] == 12290) {
                 // source[i] = '.';
             } else if (source[i] >= 65281 && source[i] <= 65374) {
-                source[i] = (char)(source[i] - 65248);
+                source[i] = (char) (source[i] - 65248);
             } else {
                 source[i] = source[i];
             }
@@ -264,11 +265,11 @@ public class StringUtils {
         char[] source = s.toCharArray();
         for (int i = 0; i < source.length; i++) {
             if (source[i] == ' ') {
-                source[i] = (char)12288;
+                source[i] = (char) 12288;
                 // } else if (source[i] == '.') {
                 // source[i] = (char)12290;
             } else if (source[i] >= 33 && source[i] <= 126) {
-                source[i] = (char)(source[i] + 65248);
+                source[i] = (char) (source[i] + 65248);
             } else {
                 source[i] = source[i];
             }
@@ -278,26 +279,45 @@ public class StringUtils {
 
     /**
      * 数据库字符转义
+     *
      * @param keyWord
      * @return
      */
-    public static String sqliteEscape(String keyWord){
+    public static String sqliteEscape(String keyWord) {
         keyWord = keyWord.replace("/", "//");
         keyWord = keyWord.replace("'", "''");
         keyWord = keyWord.replace("[", "/[");
         keyWord = keyWord.replace("]", "/]");
         keyWord = keyWord.replace("%", "/%");
-        keyWord = keyWord.replace("&","/&");
+        keyWord = keyWord.replace("&", "/&");
         keyWord = keyWord.replace("_", "/_");
         keyWord = keyWord.replace("(", "/(");
         keyWord = keyWord.replace(")", "/)");
         return keyWord;
     }
 
-    public static void html(TextView tv,String html){
+    public static void html(TextView tv, String html) {
         if (Build.VERSION.SDK_INT >= 24)
-           tv.setText(Html.fromHtml(html, Html.FROM_HTML_MODE_COMPACT));
+            tv.setText(Html.fromHtml(html, Html.FROM_HTML_MODE_COMPACT));
         else
-           tv.setText(Html.fromHtml(html));
+            tv.setText(Html.fromHtml(html));
+    }
+
+
+    public static void hightLight(TextView tv, String text, String hightLightText, String color) {
+        String s = text.replaceAll(hightLightText, "<font color=\"" + color + "\">" + hightLightText + "</font>");
+        html(tv, s);
+    }
+
+    public static void hightLight(TextView tv, String text, String hightLightText, int color) {
+        String inflater = ColorUtils.inflater(color);
+        if (inflater.length()>7){
+            if (inflater.length()== 8){
+                inflater = "#"+inflater.substring(2);
+            }else if (inflater.length() ==9){
+                inflater = "#"+inflater.substring(3);
+            }
+        }
+        hightLight(tv, text, hightLightText, inflater);
     }
 }

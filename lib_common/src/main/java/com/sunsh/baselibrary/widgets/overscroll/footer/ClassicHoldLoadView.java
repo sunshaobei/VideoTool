@@ -294,16 +294,16 @@ public class ClassicHoldLoadView extends NestedFrameLayout implements OverScroll
         /*
          * 内容没有铺满时继续执行自动加载
          */
-        postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (!refreshLayout.isTargetAbleScrollDown() && !refreshLayout.isTargetAbleScrollUp()) {
-                    if (!refreshLayout.isRefreshing()) {
-                        refreshLayout.autoLoading();
-                    }
-                }
-            }
-        }, 250);
+//        postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (!refreshLayout.isTargetAbleScrollDown() && !refreshLayout.isTargetAbleScrollUp()) {
+//                    if (!refreshLayout.isRefreshing()) {
+//                        refreshLayout.autoLoading();
+//                    }
+//                }
+//            }
+//        }, 250);
     }
 
     @Override

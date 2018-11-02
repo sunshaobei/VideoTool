@@ -9,6 +9,7 @@ import com.sunsh.baselibrary.http.ok3.builder.PostFileBuilder;
 import com.sunsh.baselibrary.http.ok3.builder.PostFormBuilder;
 import com.sunsh.baselibrary.http.ok3.builder.PostStringBuilder;
 import com.sunsh.baselibrary.http.ok3.callback.Callback;
+import com.sunsh.baselibrary.http.ok3.intercepetor.LoginIntercepter;
 import com.sunsh.baselibrary.http.ok3.intercepetor.RetryIntercepter;
 import com.sunsh.baselibrary.http.ok3.intercepetor.log.LoggerInterceptor;
 import com.sunsh.baselibrary.http.ok3.request.RequestCall;
@@ -26,7 +27,7 @@ import okhttp3.Response;
  * Created by sunsh on 18/5/30.
  */
 public class OkHttpUtils {
-    public static final long DEFAULT_MILLISECONDS = 10_000L;
+    public static final long DEFAULT_MILLISECONDS = 60_000L;
     private volatile static OkHttpUtils mInstance;
     private OkHttpClient mOkHttpClient;
     private Platform mPlatform;
@@ -49,7 +50,12 @@ public class OkHttpUtils {
                     }
                 }
             }
-            mOkHttpClient = builder.addInterceptor(new LoggerInterceptor(null, true)).addInterceptor(new RetryIntercepter(3)).sslSocketFactory(HttpsUtils.createSSLSocketFactory(), new HttpsUtils.TrustAllManager()).hostnameVerifier(new HttpsUtils.TrustAllHostnameVerifier()).build();
+            mOkHttpClient = builder.addInterceptor(new LoggerInterceptor(null, true))
+                    .addInterceptor(new RetryIntercepter(3))
+                    .addInterceptor(new LoginIntercepter())
+                    .sslSocketFactory(HttpsUtils.createSSLSocketFactory(), new HttpsUtils.TrustAllManager())
+                    .hostnameVerifier(new HttpsUtils.TrustAllHostnameVerifier())
+                    .build();
         } else {
             mOkHttpClient = okHttpClient;
         }

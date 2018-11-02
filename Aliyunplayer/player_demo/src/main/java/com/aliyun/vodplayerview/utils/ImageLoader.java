@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;

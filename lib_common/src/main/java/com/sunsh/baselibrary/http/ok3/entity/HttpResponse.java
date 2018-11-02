@@ -7,16 +7,16 @@ import java.io.Serializable;
  */
 public class HttpResponse<T> implements Serializable {
 
-    private int code;
-    private String msg;
+    private boolean result;
+    private String message;
     private T data;
 
-    public int getCode() {
-        return code;
+    public boolean isResult() {
+        return result;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setResult(boolean result) {
+        this.result = result;
     }
 
     public T getData() {
@@ -27,28 +27,24 @@ public class HttpResponse<T> implements Serializable {
         this.data = data;
     }
 
-    public String getMsg() {
-        return msg != null ? msg : "";
+    public String getMessage() {
+        return message != null ? message : "";
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String msg) {
+        this.message = msg;
     }
 
     public boolean isSuccess() {
-        return getCode() == 200;
+        return isResult();
 //                && data != null;
-    }
-
-    public boolean isSuccessWithDataNull() {
-        return getCode() == 0;
     }
 
     @Override
     public String toString() {
         return "HttpResponse{" +
-                "code=" + code +
-                ", msg='" + msg + '\'' +
+                "result=" + result +
+                ", message='" + message + '\'' +
                 ", data=" + data +
                 '}';
     }

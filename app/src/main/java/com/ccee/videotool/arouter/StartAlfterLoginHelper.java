@@ -17,13 +17,10 @@ public class StartAlfterLoginHelper {
             synchronized (StartAlfterLoginHelper.class) {
                 if (instance == null) {
                     return instance = new StartAlfterLoginHelper();
-                } else {
-                    return instance;
                 }
             }
-        } else {
-            return instance;
         }
+        return instance;
     }
 
     public Postcard getPostcard() {

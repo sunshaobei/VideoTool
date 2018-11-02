@@ -16,7 +16,7 @@ import com.sunsh.baselibrary.utils.StatusBarUtil;
 
 public abstract class BaseDialog extends Dialog {
 
-    private View view;
+    protected View view;
     protected Context mContext;
 
     public BaseDialog(@NonNull Context context) {

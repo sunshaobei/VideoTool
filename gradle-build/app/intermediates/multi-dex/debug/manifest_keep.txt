@@ -1,3 +1,0 @@
-# Referenced at C:\Users\sunsh\Desktop\VideoTool\gradle-build\app\intermediates\manifests\full\debug\AndroidManifest.xml:37
--keep class com.ccee.videotool.CCEEVideoToolApplication { <init>(...); }
-

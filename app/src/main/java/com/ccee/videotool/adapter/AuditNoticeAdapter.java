@@ -10,7 +10,8 @@ import java.util.List;
 
 public class AuditNoticeAdapter extends CommonAdapter {
     public AuditNoticeAdapter(Context context, List datas) {
-        super(context, R.layout.recycler_view_item, datas);
+        super(context, R.layout.item_video_msg, datas);
+        setEmptyView("暂无审核通知", R.mipmap.icon_empty);
     }
 
     @Override

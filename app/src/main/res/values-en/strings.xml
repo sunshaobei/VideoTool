@@ -45,8 +45,8 @@
     <string name="video_all">All</string>
     <string name="video_draft">Draft</string>
     <string name="video_check_pending">Check pending</string>
-    <string name="video_already_on_the_shelf">Already on the shelf</string>
-    <string name="video_already_down">Already down</string>
+    <string name="video_published" >Published</string>
+    <string name="video_failed">Failed</string>
     <string name="contact_service">Contact service</string>
     <string name="sys_setting">System setting</string>
     <string name="exit_login">Exit logon</string>
@@ -61,5 +61,24 @@
     <string name="login_out_des">Confirm exit logon?</string>
     <string name="audit_notice">Audit notice</string>
     <string name="view_video">View video</string>
+    <string name="share">Share</string>
+    <string name="undercarriage">Undercarriage</string>
+    <string name="video_classify">Video classify</string>
+    <string name="selected_articles">Selected articles</string>
+    <string name="video_detail">Video detail</string>
+    <string name="video_edit">Video edit</string>
+    <string name="classify">Classify *</string>
+    <string name="title">Title *</string>
+    <string name="describe">Describe *</string>
+    <string name="article">文章</string>
+    <string name="delete">删除</string>
+    <string name="save">保存</string>
+    <string name="choose_articles">选择文章</string>
+    <string name="edit1">编辑</string>
+    <string name="upload_video">上传视频</string>
+    <string name="search">搜索</string>
+    <string name="please_input_psw">请输入密码</string>
+    <string name="please_input_user_name">请输入用户名</string>
+    <string name="none_article">无关联文章</string>
 
 </resources>

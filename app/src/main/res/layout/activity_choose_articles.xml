@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.ChooseArticlesActivity">
+
+    <com.sunsh.baselibrary.widgets.overscroll.OverScrollLayout
+        android:id="@+id/overScrollLayout"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.sunsh.baselibrary.widgets.overscroll.OverScrollLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:textColor="@color/c7color"
+        android:onClick="confirm"
+        android:textSize="@dimen/s1textsize"
+        android:text="@string/confirm"
+        android:background="@color/c1color"
+        android:layout_height="@dimen/dp50" />
+</LinearLayout>

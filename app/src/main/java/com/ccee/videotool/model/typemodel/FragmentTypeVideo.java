@@ -1,18 +1,25 @@
 package com.ccee.videotool.model.typemodel;
 
 import com.ccee.videotool.R;
+import com.ccee.videotool.view.fragment.AllVideoListFragment;
+import com.ccee.videotool.view.fragment.CheckPendingVideoListFragment;
+import com.ccee.videotool.view.fragment.DraftVideoListFragment;
+import com.ccee.videotool.view.fragment.FailedVideoListFragment;
+import com.ccee.videotool.view.fragment.PublishedVideoListFragment;
 import com.ccee.videotool.view.fragment.VideoListFragment;
 
-public enum FragmentTypeVideo {
-    ALL(R.string.video_all, VideoListFragment.class),
-    DRAFT(R.string.video_draft, VideoListFragment.class),
-    CHECK_PENDING(R.string.video_check_pending, VideoListFragment.class),
-    ALREADY_ON_THE_SHELF(R.string.video_already_on_the_shelf, VideoListFragment.class),
-    ALREADY_DOWN(R.string.video_already_down, VideoListFragment.class);
-    private int title;
-    private Class<VideoListFragment> fragmentClass;
+import java.text.DecimalFormat;
 
-    FragmentTypeVideo(int title, Class<VideoListFragment> fragmentClass) {
+public enum FragmentTypeVideo {
+    ALL(R.string.video_all, AllVideoListFragment.class),
+    DRAFT(R.string.video_draft, DraftVideoListFragment.class),
+    CHECK_PENDING(R.string.video_check_pending, CheckPendingVideoListFragment.class),
+    PUBLISHED(R.string.video_published, PublishedVideoListFragment.class),
+    FAILED(R.string.video_failed, FailedVideoListFragment.class);
+    private int title;
+    private Class<? extends VideoListFragment> fragmentClass;
+
+    FragmentTypeVideo(int title, Class<? extends VideoListFragment> fragmentClass) {
         this.title = title;
         this.fragmentClass = fragmentClass;
     }
@@ -22,7 +29,7 @@ public enum FragmentTypeVideo {
         return title;
     }
 
-    public Class<VideoListFragment> getFragmentClass() {
+    public Class<? extends VideoListFragment> getFragmentClass() {
         return fragmentClass;
     }
 }

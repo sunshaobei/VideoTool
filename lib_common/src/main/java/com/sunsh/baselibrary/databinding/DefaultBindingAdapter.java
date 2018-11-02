@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zzhoujay.richtext.RichText;
@@ -15,7 +16,6 @@ import com.zzhoujay.richtext.RichText;
 import org.greenrobot.greendao.annotation.NotNull;
 
 public class DefaultBindingAdapter {
-
     /**
      * textview left 图片
      *

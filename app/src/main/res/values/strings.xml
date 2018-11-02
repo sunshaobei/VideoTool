@@ -45,8 +45,8 @@
     <string name="video_all">全部</string>
     <string name="video_draft">草稿</string>
     <string name="video_check_pending">待审核</string>
-    <string name="video_already_on_the_shelf">已上架</string>
-    <string name="video_already_down">已下架</string>
+    <string name="video_published">已发布</string>
+    <string name="video_failed">未通过</string>
     <string name="contact_service">联系客服</string>
     <string name="sys_setting">系统设置</string>
     <string name="exit_login">退出登录</string>
@@ -60,7 +60,26 @@
     <string name="tip">提示</string>
     <string name="login_out_des">确认退出登录？</string>
     <string name="audit_notice">审核通知</string>
-    <string name="view_video" >查看视频 ></string>
+    <string name="view_video">查看视频 ></string>
+    <string name="share">分享</string>
+    <string name="undercarriage">下架</string>
+    <string name="video_classify">视频分类</string>
+    <string name="selected_articles">选品文章</string>
+    <string name="video_detail">视频详情</string>
+    <string name="video_edit">视频编辑</string>
+    <string name="classify">分类 *</string>
+    <string name="title">标题 *</string>
+    <string name="describe">描述 *</string>
+    <string name="article">文章</string>
+    <string name="delete">删除</string>
+    <string name="save">保存</string>
+    <string name="choose_articles">选择文章</string>
+    <string name="edit1">编辑</string>
+    <string name="upload_video">上传视频</string>
+    <string name="search">搜索</string>
+    <string name="please_input_psw">请输入密码</string>
+    <string name="please_input_user_name">请输入用户名</string>
 
+    <string name="none_article">无关联文章</string>
 
 </resources>

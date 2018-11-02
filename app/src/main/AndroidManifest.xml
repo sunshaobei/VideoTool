@@ -26,22 +26,46 @@
     <application
         android:name=".CCEEVideoToolApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ccee"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ccee"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
+        <!-- 微信 -->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- 腾讯QQ登录 -->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1101973792" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".view.activity.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme_Transition_Slide_Bottom"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".view.activity.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme_Transition_Slide_Bottom">
+            android:theme="@style/FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -54,12 +78,36 @@
             android:theme="@style/AppTheme_Transition_Slide_Bottom" />
         <activity
             android:name=".view.activity.SysSettingActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme_Transition_Slide_Bottom" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.AuditNoticeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.VideoDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|keyboard|screenLayout"
+            android:screenOrientation="portrait" />
+        <activity android:name=".share.activity.WBShareActivity" />
+        <activity
+            android:name=".view.activity.VideoEditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.ChooseArticlesActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme_Transition_Slide_Bottom" />
+            android:theme="@style/AppTheme_Transition_Slide_Bottom"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".view.activity.UpLoadVideoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.VideoPlayActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreen" />
+        <activity
+            android:name=".view.activity.AgreementActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".update.UpdateActivity"
+            android:theme="@style/Translucent" />
     </application>
 
 </manifest>

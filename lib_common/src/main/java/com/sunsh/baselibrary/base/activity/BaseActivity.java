@@ -43,7 +43,13 @@ public abstract class BaseActivity extends SwipeBackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.darkMode(this, Color.TRANSPARENT, 0.2f, isStatusBarTextDackColor());
+        if (needCustomStatusbar()){
+            StatusBarUtil.darkMode(this, Color.TRANSPARENT, 0.2f, isStatusBarTextDackColor());
+        }
+    }
+
+    protected boolean needCustomStatusbar(){
+        return true;
     }
 
     @Override
@@ -116,13 +122,12 @@ public abstract class BaseActivity extends SwipeBackActivity {
     public void successDialog(String str) {
         if (sweetAlertDialog != null && sweetAlertDialog.isShowing()) {
             sweetAlertDialog.setTitleText(str).changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
-            new Handler().postDelayed(sweetAlertDialog::dismissWithAnimation, 1000);
         }
     }
 
     public void errorDialog(String str) {
         if (sweetAlertDialog != null && sweetAlertDialog.isShowing()) {
-            sweetAlertDialog.dismissWithAnimation();
+            sweetAlertDialog.setTitleText(str).changeAlertType(SweetAlertDialog.ERROR_TYPE);
         }
     }
 

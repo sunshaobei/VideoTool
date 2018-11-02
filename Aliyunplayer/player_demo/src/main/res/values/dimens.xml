@@ -54,5 +54,7 @@
     <!-- more-->
     <dimen name="alivc_more_dialog_height">275sp</dimen>
     <dimen name="alivc_more_features_font">12sp</dimen>
+    <dimen name="btn_padding">5dp</dimen>
+    <dimen name="btn_margin">20dp</dimen>
 
 </resources>

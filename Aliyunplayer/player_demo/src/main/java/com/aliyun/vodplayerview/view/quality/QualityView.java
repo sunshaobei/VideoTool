@@ -206,16 +206,19 @@ public class QualityView extends FrameLayout implements ITheme {
     public void showAtTop(View anchor) {
 
         FrameLayout.LayoutParams listViewParam = (LayoutParams) mListView.getLayoutParams();
-        listViewParam.width = anchor.getWidth();
+//        listViewParam.width = anchor.getWidth();
         listViewParam.height = getResources().getDimensionPixelSize(R.dimen.alivc_rate_item_height) * mQualityItems.size();
         int[] location = new int[2];
         anchor.getLocationInWindow(location);
-        listViewParam.leftMargin = location[0];
-        listViewParam.topMargin = getHeight() - listViewParam.height - anchor.getHeight() - 20;
+        listViewParam.leftMargin =  location[0];
+        listViewParam.topMargin = (int) (getHeight() - listViewParam.height - anchor.getHeight() - getResources().getDimension(R.dimen.btn_margin));
         mListView.setLayoutParams(listViewParam);
 
         mListView.setVisibility(VISIBLE);
 
+    }
+    public boolean isShow(){
+        return mListView.getVisibility()== VISIBLE;
     }
 
     /**
@@ -276,6 +279,8 @@ public class QualityView extends FrameLayout implements ITheme {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             TextView view = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.ratetype_item, null);
+            view.setPadding((int) getResources().getDimension(R.dimen.btn_padding),0,0,0);
+            view.setTextSize(10);
             if (mQualityItems != null) {
                 String quality = mQualityItems.get(position);
                 view.setText(QualityItem.getItem(getContext(), quality, isMtsSource).getName());

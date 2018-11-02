@@ -7,7 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ccee.videotool.model.entities.request.VideoListRequest;
+import com.ccee.videotool.model.entities.response.VideoListBean;
+import com.ccee.videotool.model.http.HttpManager;
 import com.sunsh.baselibrary.base.fragment.BaseFragment;
+import com.sunsh.baselibrary.http.ok3.entity.HttpCallBack;
+import com.sunsh.baselibrary.http.ok3.entity.HttpResponse;
 
 public abstract class VideoToolFragment extends BaseFragment {
 
@@ -35,5 +40,6 @@ public abstract class VideoToolFragment extends BaseFragment {
     protected abstract void initView(View rootView);
 
     protected abstract void initData();
+
 
 }

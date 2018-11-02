@@ -1,14 +1,24 @@
 package com.ccee.videotool;
 
-import com.aliyun.common.crash.CrashHandler;
+import com.alivc.player.AliVcMediaPlayer;
 import com.aliyun.common.httpfinal.QupaiHttpFinal;
+import com.ccee.videotool.greendao.GreenDaoManager;
+import com.sina.weibo.sdk.WbSdk;
+import com.sina.weibo.sdk.auth.AuthInfo;
 import com.sunsh.baselibrary.BaseApplication;
+import com.sunsh.baselibrary.utils.sp.SpKey;
+import com.sunsh.baselibrary.utils.sp.SpUtil;
 
 public class CCEEVideoToolApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
         initRecorder();
+//        AuthInfo mAuthInfo = new AuthInfo(this, AppIdConstants.WB_APP_KEY,
+//                AppIdConstants.REDIRECT_URL, AppIdConstants.SCOPE);
+//        WbSdk.install(this, mAuthInfo);
+        GreenDaoManager.getInstance().init(this);
+        AliVcMediaPlayer.init(getApplicationContext());
     }
 
     /**

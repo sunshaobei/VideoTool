@@ -21,23 +21,6 @@
 #-renamesourcefileattribute SourceFile
 
 
-#crashreporter
--keep class com.alibaba.motu.crashreporter.MotuCrashReporter{*;}
--keep class com.alibaba.motu.crashreporter.ReporterConfigure{*;}
--keep class com.alibaba.motu.crashreporter.IUTCrashCaughtListener{*;}
--keep class com.ut.mini.crashhandler.IUTCrashCaughtListener{*;}
--keep class com.alibaba.motu.crashreporter.utrestapi.UTRestReq{*;}
--keep class com.alibaba.motu.crashreporter.handler.nativeCrashHandler.NativeCrashHandler{*;}
--keep class com.alibaba.motu.crashreporter.handler.nativeCrashHandler.NativeExceptionHandler{*;}
--keep interface com.alibaba.motu.crashreporter.handler.nativeCrashHandler.NativeExceptionHandler{*;}
-#crashreporter3.0以后 一定要加这个
--keep class com.uc.crashsdk.JNIBridge{*;}
-
-
-
-
-
-
 -optimizationpasses 5
 -dontusemixedcaseclassnames
 -dontskipnonpubliclibraryclasses
@@ -51,6 +34,9 @@
 # --------------------------------------------------------------------------
 #----------------------------------------------------------------------------
 
+
+
+
 #---------------------------------默认保留区---------------------------------
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application
@@ -63,6 +49,10 @@
 -keep public class com.android.vending.licensing.ILicensingService
 -keep class android.support.** {*;}
 
+# Keep native methods
+-keepclassmembers class * {
+    native <methods>;
+}
 -keepclasseswithmembernames class * {
     native <methods>;
 }
@@ -98,20 +88,16 @@
 -keep class **.R$* {
  *;
 }
--keepclassmembers class * {
-    void *(**On*Event);
-}
-
 
 #----------------rx bus--------------------------------
 -keepattributes *Annotation*
 -keep class * extends java.lang.annotation.Annotation { *; }
 -keep interface * extends java.lang.annotation.Annotation { *; }
 -keepclassmembers class ** {
-    @com.cifnews.library.Subscribe <methods>;
+    @com.sunsh.baselibrary.rxbus.Subscribe <methods>;
 }
 #方法反射通知接口不混淆
--keep public interface com.cifnews.lib_coremodel.events** { *; }
+-keep public interface com.ccee.videotool.event** { *; }
 
 #----------------------------------------------------------------------------
 
@@ -127,31 +113,25 @@
     public void *(android.webkit.WebView, jav.lang.String);
 }
 
--keep class com.factory.factorybeans.** { *; }
--keep class utils.** { *; }
--keep class beans.** { *; }
--keep class com.radio.model** { *; }
-#---------------------------------友盟------------------------------------
--dontwarn com.taobao.**
--dontwarn anet.channel.**
--dontwarn anetwork.channel.**
--dontwarn org.android.**
--dontwarn org.apache.thrift.**
--dontwarn com.xiaomi.**
--dontwarn com.huawei.**
 
 
--keep class com.taobao.** {*;}
--keep class org.android.** {*;}
--keep class anet.channel.** {*;}
--keep class com.umeng.** {*;}
--keep class com.xiaomi.** {*;}
--keep class com.huawei.** {*;}
--keep class org.apache.thrift.** {*;}
-
--keep public class **.R$*{
-   public static final int *;
+#--------------------路由----------------------------------------------
+-keep public class com.alibaba.android.arouter.routes.**{*;}
+-keep class * implements com.alibaba.android.arouter.facade.template.ISyringe{*;}
+-keep class * implements com.alibaba.android.arouter.facade.template.IProvider{*;}
+-keep class * implements com.alibaba.android.arouter.facade.template.IInterceptor{*;}
+-keep class com.ccee.videotool.arouter**{*;}
+-keepclassmembers class ** {
+     @com.ccee.videotool.arouter.LoginIntercept <fields>;
 }
+#------------------------end-----------------------------------------
+
+#---------------------------- data类不混淆--------------------
+-keep class com.ccee.videotool.model**{*;}
+-keep class com.sunsh.baselibrary.http.ok3.entity**{*;}
+-keep class com.sunsh.baselibrary.widgets.pickview.citypickerview.bean**{*;}
+
+
 #---------------------------------微信------------------------------------
 -keep class com.tencent.mm.opensdk.** {
    *;
@@ -165,69 +145,33 @@
 -dontwarn com.tencent.mm.**
 -keep class com.tencent.mm.**{*;}
 
+#------------------------------fastjson--------------------------------
 -dontwarn com.alibaba.fastjson.**
 -keep class com.alibaba.fastjson.** { *; }
+#------------------------------end---------------------
 
 # Keep our interfaces so they can be used by other ProGuard rules.
 # See http://sourceforge.net/p/proguard/bugs/466/
 -keep,allowobfuscation @interface com.facebook.common.internal.DoNotStrip
-
 # Do not strip any method/class that is annotated with @DoNotStrip
 -keep @com.facebook.common.internal.DoNotStrip class *
 -keepclassmembers class * {
     @com.facebook.common.internal.DoNotStrip *;
 }
 
-# Keep native methods
--keepclassmembers class * {
-    native <methods>;
+
+#-------------------------------greendao-------------------------------
+-keep class org.greenrobot.greendao.**{*;}
+-keep public interface org.greenrobot.greendao.**
+-keepclassmembers class * extends org.greenrobot.greendao.AbstractDao {
+public static java.lang.String TABLENAME;
 }
-
-
-# 红包
--keep class com.google.gson.** { *; }
--keep class com.uuhelper.Application.** {*;}
--keep class net.sourceforge.zbar.** { *; }
--keep class com.google.android.gms.** { *; }
--keep class com.alipay.** {*;}
--keep class com.jrmf360.rylib.** {*;}
-
-
-# 支付宝
-# -libraryjars libs/alipaySdk-20170309.jar
-
--keep class com.alipay.android.app.IAlixPay{*;}
--keep class com.alipay.android.app.IAlixPay$Stub{*;}
--keep class com.alipay.android.app.IRemoteServiceCallback{*;}
--keep class com.alipay.android.app.IRemoteServiceCallback$Stub{*;}
--keep class com.alipay.sdk.app.PayTask{ public *;}
--keep class com.alipay.sdk.app.AuthTask{ public *;}
-
-# OkHttp
--dontwarn okio.**
--dontwarn com.squareup.okhttp.**
--keep class okio.**{*;}
--keep class com.squareup.okhttp.** { *; }
--keep interface com.squareup.okhttp.** { *; }
-
--dontwarn java.nio.file.*
--dontwarn javax.annotation.**
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
-
-# glide框架
--keep public class * implements com.bumptech.glide.module.GlideModule
--keep public class * extends com.bumptech.glide.AppGlideModule
--keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
-    **[] $VALUES;
-    public *;
-}
-
-
-#-------------------------delegate------------------
--keepclassmembers class * extends com.cifnews.lib_common.adapter.recyclerview.base.ItemViewDelegate{
- public <init>(android.content.Context);
-}
-#-------------------------end---------------------
+-keep class **$Properties
+-keep class net.sqlcipher.database.**{*;}
+-keep public interface net.sqlcipher.database.**
+-dontwarn net.sqlcipher.database.**
+-dontwarn org.greenrobot.greendao.**
+#------------------------------end-------------------------------------
 
 #------------------  下方是共性的排除项目         ----------------
 # 方法名中含有“JNI”字符的，认定是Java Native Interface方法，自动排除
@@ -242,7 +186,10 @@
 -keep class **JNI* {*;}
 
 
+
+
 # Addidional for x5.sdk classes for apps
+
 -keep class com.tencent.smtt.export.external.**{
     *;
 }
@@ -475,14 +422,3 @@
 }
 #---------------------------------------------------------------------------
 #---------------------------------x5 end----------------------------------
-
-#--------------------路由----------------------------------------------
--keep public class com.alibaba.android.arouter.routes.**{*;}
--keep class * implements com.alibaba.android.arouter.facade.template.ISyringe{*;}
--keep class * implements com.alibaba.android.arouter.facade.template.IProvider{*;}
--keep class * implements com.alibaba.android.arouter.facade.template.IInterceptor{*;}
--keep class com.ccee.videotool.arouter**{*;}
--keepclassmembers class ** {
-     @com.ccee.videotool.arouter.LoginIntercept <fields>;
-}
-#------------------------end-----------------------------------------

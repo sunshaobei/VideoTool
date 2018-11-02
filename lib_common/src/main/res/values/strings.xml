@@ -6,4 +6,6 @@
     <string name="LOADING">Loading...</string>
     <string name="default_progressbar">Default Progressbar:</string>
 
+    <string name="toolbar_title">toolbar_title</string>
+
 </resources>

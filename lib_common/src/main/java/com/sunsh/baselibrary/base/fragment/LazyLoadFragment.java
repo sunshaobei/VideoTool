@@ -23,7 +23,7 @@ public abstract class LazyLoadFragment extends BaseFragment {
     private boolean isUIVisible;
 
     //是否首次加载
-    private boolean isFirstLoad = true;
+    protected boolean isFirstLoad = true;
 
     protected FrameLayout rootView;
     private Unbinder bind;

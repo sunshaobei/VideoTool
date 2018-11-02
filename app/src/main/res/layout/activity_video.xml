@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View"/>
+        <variable
+            name="data"
+            type="com.ccee.videotool.model.data.VideoData" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/c7color"
+        android:orientation="vertical">
+
+        <com.sunsh.baselibrary.widgets.overscroll.OverScrollLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/c7color"
+                android:orientation="vertical"
+              >
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dp25"
+                    app:cardCornerRadius="@dimen/dp5"
+                    android:layout_height="wrap_content">
+                    <FrameLayout
+                        android:background="@color/black"
+                        android:layout_width="@dimen/dp150"
+                        android:layout_height="@dimen/dp150" >
+
+
+                        <ImageView
+                            android:id="@+id/iv_cover"
+                            android:layout_width="match_parent"
+                            android:layout_gravity="center"
+                            app:imgUrl="@{data.cover}"
+                            android:scaleType="fitCenter"
+                            android:layout_height="match_parent" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:padding="@dimen/dp10"
+                            android:onClick="videoPlay"
+                            android:background="?attr/selectableItemBackground"
+                            android:layout_gravity="center"
+                            android:src="@mipmap/btn_play"
+                            android:layout_height="wrap_content" />
+
+                    </FrameLayout>
+                </android.support.v7.widget.CardView>
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp50"
+                    android:paddingStart="@dimen/dp15"
+                    android:onClick="chooseClassify"
+                    android:paddingEnd="@dimen/dp15"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/dp48"
+                        android:layout_height="wrap_content"
+                        android:text="@string/classify"
+                        android:textColor="@color/c3color"
+                        android:textSize="@dimen/s2textsize" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp15"
+                        android:layout_weight="1"
+                        android:text="@{data.category}"
+                        android:drawableEnd="@mipmap/icon_more"
+                        android:ellipsize="end"
+                        android:hint="选择视频分类"
+                        android:singleLine="true"
+                        android:textColor="@color/c2color"
+                        android:textSize="@dimen/s2textsize" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp0_5"
+                    android:layout_marginStart="@dimen/dp15"
+                    android:layout_marginEnd="@dimen/dp15"
+                    android:background="@color/c5color" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp50"
+                    android:paddingStart="@dimen/dp15"
+                    android:paddingEnd="@dimen/dp15"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/dp48"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title"
+                        android:textColor="@color/c3color"
+                        android:textSize="@dimen/s2textsize" />
+
+                    <com.sunsh.baselibrary.widgets.SearchEditText
+                        android:layout_width="0dp"
+                        android:background="@color/c7color"
+                        android:text="@{data.title}"
+                        android:focusable="true"
+                        android:id="@+id/edit_title"
+                        android:focusableInTouchMode="true"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp15"
+                        android:layout_weight="1"
+                        android:maxLength="20"
+                        android:hint="填写标题（1~20个字符）"
+                        android:singleLine="true"
+                        android:textColor="@color/c2color"
+                        android:textSize="@dimen/s2textsize" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp0_5"
+                    android:layout_marginStart="@dimen/dp15"
+                    android:layout_marginEnd="@dimen/dp15"
+                    android:background="@color/c5color" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:paddingStart="@dimen/dp15"
+                    android:paddingEnd="@dimen/dp15"
+                    android:layout_height="@dimen/dp100">
+
+                    <TextView
+                        android:id="@+id/describe"
+                        android:layout_width="@dimen/dp48"
+                        android:layout_height="@dimen/dp50"
+                        android:gravity="center_vertical"
+                        android:text="@string/describe"
+                        android:textColor="@color/c3color"
+                        android:textSize="@dimen/s2textsize" />
+
+                    <com.sunsh.baselibrary.widgets.SearchEditText
+                        android:id="@+id/edit_describe"
+                        android:background="@color/c7color"
+                        android:text="@{data.des}"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/describe"
+                        android:layout_marginStart="@dimen/dp15"
+                        android:layout_toEndOf="@+id/describe"
+                        android:hint="添加描述"
+                        android:lineSpacingExtra="@dimen/dp9"
+                        android:textColor="@color/c2color"
+                        android:textSize="@dimen/s2textsize" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp0_5"
+                    android:layout_marginStart="@dimen/dp15"
+                    android:layout_marginEnd="@dimen/dp15"
+                    android:background="@color/c5color" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp50"
+                    android:gravity="center_vertical"
+                    android:onClick="chooseArticles"
+                    android:paddingStart="@dimen/dp15"
+                    android:paddingEnd="@dimen/dp15"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/dp48"
+                        android:layout_height="wrap_content"
+                        android:text="@string/article"
+                        android:textColor="@color/c3color"
+                        android:textSize="@dimen/s2textsize" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp15"
+                        android:layout_weight="1"
+                        android:drawableEnd="@mipmap/icon_more"
+                        android:ellipsize="end"
+                        android:text="@{data.article}"
+                        android:hint="选择选品文章"
+                        android:singleLine="true"
+                        android:textColor="@color/c2color"
+                        android:textSize="@dimen/s2textsize" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp0_5"
+                    android:layout_marginStart="@dimen/dp15"
+                    android:layout_marginEnd="@dimen/dp15"
+                    android:background="@color/c5color" />
+
+            </LinearLayout>
+        </com.sunsh.baselibrary.widgets.overscroll.OverScrollLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:elevation="@dimen/dp5">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp50"
+                    android:layout_weight="1"
+                    android:background="@color/c6color"
+                    android:gravity="center"
+                    android:text="@{data.bottomLeft}"
+                    android:onClick="bottomLeft"
+                    android:textColor="@color/c3color"
+                    android:textSize="@dimen/s1textsize" />
+                <View
+                    android:layout_width="@dimen/dp0_5"
+                    android:background="@color/c5color"
+                    android:layout_height="match_parent"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/c3color"
+                    android:visibility="@{data.show?View.VISIBLE:View.GONE}"
+                    android:text="存为草稿"
+                    android:paddingStart="@dimen/dp20"
+                    android:onClick="save"
+                    android:paddingEnd="@dimen/dp20"
+                    android:textSize="@dimen/s1textsize"
+                    android:background="@color/c6color"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="@dimen/dp0"
+                android:layout_height="@dimen/dp50"
+                android:layout_weight="1"
+                android:background="@color/c1color"
+                android:gravity="center"
+                android:text="@{data.bottomRight}"
+                android:onClick="bottomRight"
+                android:textColor="@color/c7color"
+                android:textSize="@dimen/s1textsize" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

@@ -1,5 +1,6 @@
 package com.aliyun.vodplayerview.view.download;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -61,7 +62,7 @@ public class AddDownloadView extends LinearLayout {
         init();
     }
 
-    public AddDownloadView(AliyunPlayerSkinActivity context, AliyunScreenMode screenMode) {
+    public AddDownloadView(Activity context, AliyunScreenMode screenMode) {
         super(context);
         this.screenMode = screenMode;
         init();

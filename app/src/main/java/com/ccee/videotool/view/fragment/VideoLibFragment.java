@@ -1,22 +1,25 @@
 package com.ccee.videotool.view.fragment;
 
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ccee.videotool.R;
 import com.ccee.videotool.arouter.Arouter;
 import com.ccee.videotool.arouter.RoutePath;
+import com.ccee.videotool.event.AllvideoListener;
+import com.ccee.videotool.event.VideoDeleteListener;
+import com.ccee.videotool.event.VideoSaveDraftListener;
+import com.ccee.videotool.event.VideoUpLoadSuccessListener;
+import com.ccee.videotool.event.VideoUpdateListener;
 import com.ccee.videotool.model.typemodel.FragmentTypeVideo;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.sunsh.baselibrary.base.adapter.BasePageAdapter;
-import com.sunsh.baselibrary.base.fragment.BaseFragment;
+import com.sunsh.baselibrary.rxbus.RxBus;
+import com.sunsh.baselibrary.rxbus.Subscribe;
 import com.sunsh.baselibrary.utils.SizeUtils;
 
 import java.util.ArrayList;
@@ -25,7 +28,12 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class VideoLibFragment extends VideoToolFragment implements View.OnClickListener {
+public class VideoLibFragment extends VideoToolFragment implements View.OnClickListener
+        , AllvideoListener
+        , VideoDeleteListener
+        , VideoUpdateListener
+        , VideoSaveDraftListener
+        , VideoUpLoadSuccessListener {
 
 
     private SlidingTabLayout tabLayout;
@@ -33,6 +41,7 @@ public class VideoLibFragment extends VideoToolFragment implements View.OnClickL
     private TextView tv_mine_video;
     private ViewPager viewPager;
     private View relative_msg;
+    List<Fragment> fragments = new ArrayList<>();
 
     public VideoLibFragment() {
         // Required empty public constructor
@@ -51,11 +60,12 @@ public class VideoLibFragment extends VideoToolFragment implements View.OnClickL
         relative_msg = rootView.findViewById(R.id.relative_msg);
         relative_msg.setOnClickListener(this);
         viewPager = rootView.findViewById(R.id.vp);
+        tv_msg_dot.setVisibility(View.GONE);
         setUpVp();
+        RxBus.getDefault().register(this);
     }
 
     private void setUpVp() {
-        List<Fragment> fragments = new ArrayList<>();
         List<String> titles = new ArrayList<>();
         for (FragmentTypeVideo fragmentTypeVideo : FragmentTypeVideo.values()) {
             try {
@@ -79,8 +89,6 @@ public class VideoLibFragment extends VideoToolFragment implements View.OnClickL
 
     @Override
     protected void initData() {
-
-
     }
 
     public void refresh() {
@@ -88,11 +96,62 @@ public class VideoLibFragment extends VideoToolFragment implements View.OnClickL
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RxBus.getDefault().unregister(this);
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.relative_msg:
-                Arouter.navigationWhitOption(RoutePath.AUDIT_NOTICE);
+                Arouter.navigation(RoutePath.AUDIT_NOTICE);
                 break;
+        }
+    }
+
+    @Subscribe
+    @Override
+    public void allVideo(AllVideo allVideo) {
+        tv_mine_video.setText(String.format("我的视频 %s", allVideo.getCount()));
+    }
+
+    @Subscribe
+    @Override
+    public void onDelete(DeleteVideo o) {
+        for (Fragment fragment : fragments) {
+            if (fragment instanceof VideoListFragment) {
+                ((VideoListFragment) fragment).onRefresh();
+            }
+        }
+    }
+
+    @Subscribe
+    @Override
+    public void onUpdate(UpdateVideo o) {
+        for (Fragment fragment : fragments) {
+            if (fragment instanceof VideoListFragment) {
+                ((VideoListFragment) fragment).onRefresh();
+                viewPager.setCurrentItem(o.getType());
+            }
+        }
+    }
+
+    @Subscribe
+    @Override
+    public void onSave(Draft o) {
+        viewPager.setCurrentItem(1);
+        Fragment fragment = fragments.get(1);
+        if (fragment instanceof VideoListFragment) {
+            ((VideoListFragment) fragment).onRefresh();
+        }
+    }
+
+    @Override
+    public void onUpLoadSuccess(UpLoadSuccess o) {
+        Fragment fragment = fragments.get(1);
+        if (fragment instanceof VideoListFragment) {
+            ((VideoListFragment) fragment).onRefresh();
         }
     }
 }
