@@ -72,6 +72,8 @@
     <dimen name="alivc_titlebar_font_size">18sp</dimen>
     <dimen name="alivc_titlebar_title_left_margin">8dp</dimen>
     <dimen name="alivc_titlebar_title_right_margin">16dp</dimen>
+    <dimen name="btn_margin">20dp</dimen>
+    <dimen name="btn_padding">5dp</dimen>
     <item name="custom_id_min" type="id"/>
     <string name="add_to_download">To add</string>
     <string name="alivc_alivc_replay_msg">Video ended</string>

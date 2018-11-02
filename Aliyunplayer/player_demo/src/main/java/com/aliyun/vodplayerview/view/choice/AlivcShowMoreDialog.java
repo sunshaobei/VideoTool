@@ -29,7 +29,7 @@ public class AlivcShowMoreDialog extends Dialog {
     private boolean mIsAnimating = false;
 
     public AlivcShowMoreDialog(@NonNull Context context) {
-        this(context, AliyunScreenMode.Full);
+        this(context, AliyunScreenMode.Small);
     }
 
 
@@ -67,8 +67,6 @@ public class AlivcShowMoreDialog extends Dialog {
         if (aliyunScreenMode == AliyunScreenMode.Small){
             WindowManager.LayoutParams params = getWindow().getAttributes();
             params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-            params.gravity = Gravity.BOTTOM | Gravity.CENTER;
-
             int screenWidth = ScreenUtils.getWidth(getContext());
             int screenHeight = ScreenUtils.getHeight(getContext());
             params.width = screenWidth < screenHeight ? screenWidth:screenHeight;
@@ -78,7 +76,6 @@ public class AlivcShowMoreDialog extends Dialog {
             WindowManager.LayoutParams params = getWindow().getAttributes();
             params.height = ViewGroup.LayoutParams.MATCH_PARENT;
             params.gravity = Gravity.RIGHT;
-
             int screenWidth = ScreenUtils.getWidth(getContext());
             int screenHeight = ScreenUtils.getHeight(getContext());
             params.width = screenWidth < screenHeight ? screenWidth:screenHeight;

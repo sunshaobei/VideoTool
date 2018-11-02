@@ -3,8 +3,10 @@ package com.sunsh.baselibrary.utils.sp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 
 import com.sunsh.baselibrary.utils.AppContextUtil;
+import com.sunsh.baselibrary.utils.ToastUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -68,7 +70,7 @@ public class SpUtil {
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             String key = entry.getKey();
             Object object = entry.getValue();
-            if(null != object){
+            if (null != object) {
                 if (object instanceof String) {
                     editor.putString(key, (String) object);
                 } else if (object instanceof Integer) {
@@ -111,7 +113,6 @@ public class SpUtil {
             return sharedPreferences.getString(key, null);
         }
     }
-
 
 
     public String getString(String key, String s) {
@@ -159,6 +160,62 @@ public class SpUtil {
     }
 
     public boolean isLogin() {
+        String token = getToken();
+        if (TextUtils.isEmpty(token)) {
+            return false;
+        }
+        if (System.currentTimeMillis() > getExpiresAt() * 1000) {
+            ToastUtils.showShortToastSafe("您的token已过期，请重新登录");
+            return false;
+        }
         return true;
+    }
+
+    public String getToken() {
+        return getString(SpKey.TOKEN);
+    }
+
+    public void saveToken(String s) {
+        putString(SpKey.TOKEN, s);
+    }
+
+    public void saveExpiresAt(long s) {
+        putLong(SpKey.EXPIRES_AT, s);
+    }
+
+    public long getExpiresAt() {
+        return getLong(SpKey.EXPIRES_AT);
+    }
+
+    public void saveSupplier_title(String s) {
+        putString(SpKey.SUPPLIER_TITLE, s);
+    }
+
+    public String getSupplier_title() {
+        return getString(SpKey.SUPPLIER_TITLE);
+    }
+
+    public void saveSupplier_logo(String s) {
+        putString(SpKey.SUPPLIER_LOGO, s);
+    }
+
+    public String getSupplier_logo() {
+        return getString(SpKey.SUPPLIER_LOGO);
+    }
+
+    public void saveSupplier_account(String s) {
+        putString(SpKey.SUPPLIER_ACCOUTN, s);
+    }
+
+    public String getSupplier_account() {
+        return getString(SpKey.SUPPLIER_ACCOUTN);
+    }
+
+    public void clearSp4LoginOut() {
+        saveToken("");
+        saveSupplier_logo("");
+        saveExpiresAt(0);
+        saveSupplier_title("");
+        saveSupplier_account("");
     }
 }

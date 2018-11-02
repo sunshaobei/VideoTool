@@ -71,10 +71,10 @@ public abstract class HttpCallBack<T> extends Callback<T> {
                     T datas = JSONUtils.fromJson(body, beanType);
                     if (datas instanceof HttpResponse) {
                        HttpResponse httpResponse = (HttpResponse) datas;
-                        if(httpResponse.getCode() == HttpErrorCodeModel.TOKEN_TIMEOUT1||httpResponse.getCode()== HttpErrorCodeModel.TOKEN_TIMEOUT2 || httpResponse.getCode()== HttpErrorCodeModel.TOKEN_TIMEOUT3 ||httpResponse.getCode()== HttpErrorCodeModel.SYSTEM_DEPLOYMENT){
+                        if(httpResponse.isResult()){
                            HttpErrorCodeModel httpErrorCodeModel = new HttpErrorCodeModel();
-                            httpErrorCodeModel.setCode(httpResponse.getCode());
-                            httpErrorCodeModel.setError(httpResponse.getMsg());
+                            httpErrorCodeModel.setCode(HttpErrorCodeModel.TOKEN_TIMEOUT3);
+                            httpErrorCodeModel.setError(httpResponse.getMessage());
                         }
                     }
                     return datas;

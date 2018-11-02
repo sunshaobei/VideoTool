@@ -215,8 +215,9 @@ public abstract class BaseBarActivity extends BaseActivity {
     }
 
     protected void setToolBarVisible(Boolean b) {
-        toolbar = (Toolbar) findViewById(toolBarResourceId());
-        toolbar.setVisibility(b ? View.VISIBLE : View.GONE);
+//        toolbar = (Toolbar) findViewById(toolBarResourceId());
+//        toolbar.setVisibility(b ? View.VISIBLE : View.GONE);
+        toolBarBackgroundView().setVisibility(b ? View.VISIBLE : View.GONE);
     }
 
     protected float getBarBackViewHeight() {

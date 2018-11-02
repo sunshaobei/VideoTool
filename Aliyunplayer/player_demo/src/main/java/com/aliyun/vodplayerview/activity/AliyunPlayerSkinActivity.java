@@ -1371,32 +1371,6 @@ public class AliyunPlayerSkinActivity extends BaseActivity {
         ShowMoreView showMoreView = new ShowMoreView(activity, moreValue);
         showMoreDialog.setContentView(showMoreView);
         showMoreDialog.show();
-        showMoreView.setOnDownloadButtonClickListener(new ShowMoreView.OnDownloadButtonClickListener() {
-            @Override
-            public void onDownloadClick() {
-                // 点击下载
-                showMoreDialog.dismiss();
-                if (!"vidsts".equals(PlayParameter.PLAY_PARAM_TYPE)) {
-                    Toast.makeText(activity, "Url类型不支持下载", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                showAddDownloadView(AliyunScreenMode.Full);
-            }
-        });
-
-        showMoreView.setOnScreenCastButtonClickListener(new ShowMoreView.OnScreenCastButtonClickListener() {
-            @Override
-            public void onScreenCastClick() {
-                Toast.makeText(AliyunPlayerSkinActivity.this, "功能开发中, 敬请期待...", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        showMoreView.setOnBarrageButtonClickListener(new ShowMoreView.OnBarrageButtonClickListener() {
-            @Override
-            public void onBarrageClick() {
-                Toast.makeText(AliyunPlayerSkinActivity.this, "功能开发中, 敬请期待...", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         showMoreView.setOnSpeedCheckedChangedListener(new ShowMoreView.OnSpeedCheckedChangedListener() {
             @Override

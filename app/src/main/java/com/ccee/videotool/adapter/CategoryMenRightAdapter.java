@@ -1,0 +1,33 @@
+package com.ccee.videotool.adapter;
+
+import android.content.Context;
+import android.widget.TextView;
+
+import com.ccee.videotool.R;
+import com.ccee.videotool.model.entities.response.CategoryBean;
+import com.sunsh.baselibrary.adapter.recyclerview.CommonAdapter;
+import com.sunsh.baselibrary.adapter.recyclerview.base.ViewHolder;
+
+import java.util.List;
+
+public class CategoryMenRightAdapter extends CommonAdapter<CategoryBean> {
+    private List<Integer> ids;
+
+    public CategoryMenRightAdapter(Context context, List<CategoryBean> datas, List<Integer> ids) {
+        super(context, R.layout.item_category_menu_right, datas);
+        this.ids = ids;
+    }
+
+    @Override
+    protected void convert(ViewHolder holder, CategoryBean o, int position) {
+        TextView textView = (TextView) holder.itemView;
+        textView.setText(o.getTitle());
+        boolean selected = false;
+        if (ids.size() > 1) {
+            Integer integer = ids.get(1);
+            selected = (integer == o.getCategoryId());
+        }
+        textView.setSelected(selected);
+    }
+
+}

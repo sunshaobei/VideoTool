@@ -68,15 +68,15 @@ public final class R {
         public static final int alivc_quality_same = 0x7f0e0073;
         public static final int alivc_sd_definition = 0x7f0e0077;
         public static final int alivc_success = 0x7f0e0080;
-        public static final int download_error_curl_download = 0x7f0e00f2;
-        public static final int download_error_curl_init = 0x7f0e00f3;
-        public static final int download_error_curl_opt = 0x7f0e00f4;
-        public static final int download_error_dest_open_fail = 0x7f0e00f5;
-        public static final int download_error_disk_full = 0x7f0e00f6;
-        public static final int download_error_invalid_secret_image = 0x7f0e00f7;
-        public static final int download_error_source_open_fail = 0x7f0e00f8;
-        public static final int download_error_stopped = 0x7f0e00f9;
-        public static final int download_error_unkown = 0x7f0e00fa;
-        public static final int download_error_url_size = 0x7f0e00fb;
+        public static final int download_error_curl_download = 0x7f0e00f7;
+        public static final int download_error_curl_init = 0x7f0e00f8;
+        public static final int download_error_curl_opt = 0x7f0e00f9;
+        public static final int download_error_dest_open_fail = 0x7f0e00fa;
+        public static final int download_error_disk_full = 0x7f0e00fb;
+        public static final int download_error_invalid_secret_image = 0x7f0e00fc;
+        public static final int download_error_source_open_fail = 0x7f0e00fd;
+        public static final int download_error_stopped = 0x7f0e00fe;
+        public static final int download_error_unkown = 0x7f0e00ff;
+        public static final int download_error_url_size = 0x7f0e0100;
     }
 }

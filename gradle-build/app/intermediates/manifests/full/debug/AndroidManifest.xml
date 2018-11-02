@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="18"
+        android:minSdkVersion="19"
         android:targetSdkVersion="27" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -38,21 +38,45 @@
         android:name="com.ccee.videotool.CCEEVideoToolApplication"
         android:allowBackup="true"
         android:debuggable="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ccee"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ccee"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
+
+        <!-- 微信 -->
+        <activity
+            android:name="com.ccee.videotool.wxapi.WXEntryActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- 腾讯QQ登录 -->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1101973792" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.ccee.videotool.view.activity.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme_Transition_Slide_Bottom"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.ccee.videotool.view.activity.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme_Transition_Slide_Bottom" >
+            android:theme="@style/FullScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -65,12 +89,36 @@
             android:theme="@style/AppTheme_Transition_Slide_Bottom" />
         <activity
             android:name="com.ccee.videotool.view.activity.SysSettingActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme_Transition_Slide_Bottom" />
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.ccee.videotool.view.activity.AuditNoticeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ccee.videotool.view.activity.VideoDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|keyboard|screenLayout"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.ccee.videotool.share.activity.WBShareActivity" />
+        <activity
+            android:name="com.ccee.videotool.view.activity.VideoEditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ccee.videotool.view.activity.ChooseArticlesActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme_Transition_Slide_Bottom" />
+            android:theme="@style/AppTheme_Transition_Slide_Bottom"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="com.ccee.videotool.view.activity.UpLoadVideoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ccee.videotool.view.activity.VideoPlayActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreen" />
+        <activity
+            android:name="com.ccee.videotool.view.activity.AgreementActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ccee.videotool.update.UpdateActivity"
+            android:theme="@style/Translucent" />
         <activity
             android:name="com.aliyun.demo.snap.SnapCropSetting"
             android:screenOrientation="portrait"
@@ -145,6 +193,39 @@
         <activity
             android:name="com.google.zxing.activity.CaptureActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <activity
+            android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.sina.weibo.sdk.share.WbShareToStoryActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_STORY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <service android:name="com.liulishuo.filedownloader.services.FileDownloadService$SharedMainProcessService" />
+        <service
+            android:name="com.liulishuo.filedownloader.services.FileDownloadService$SeparateProcessService"
+            android:process=":filedownloader" />
 
         <meta-data
             android:name="android.support.VERSION"
@@ -217,9 +298,12 @@
         <meta-data
             android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
             android:value="GlideModule" />
-        <meta-data
-            android:name="android.arch.lifecycle.VERSION"
-            android:value="27.0.0-SNAPSHOT" />
+
+        <provider
+            android:name="android.arch.lifecycle.ProcessLifecycleOwnerInitializer"
+            android:authorities="com.ccee.videotool.lifecycle-trojan"
+            android:exported="false"
+            android:multiprocess="true" />
     </application>
 
 </manifest>

@@ -33,12 +33,12 @@ dependencies {
     implementation externalAndroidDesign
 
     implementation externalJSR305
-    implementation externalGlide
+    api externalGlide
     implementation externalAndroidSupportV4
 
     implementation externalEasyPermissions
     implementation externalOKHTTP
-    implementation externalGlideOkHttp
+    api externalGlideOkHttp
     implementation externalOKIO
     implementation externalGSON
 

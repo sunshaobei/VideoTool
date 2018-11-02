@@ -1,5 +1,6 @@
 package com.aliyun.vodplayerview.view.more;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -15,24 +16,18 @@ import com.aliyun.vodplayer.R;
 import com.aliyun.vodplayerview.activity.AliyunPlayerSkinActivity;
 import com.aliyun.vodplayerview.widget.AliyunScreenMode;
 
-public class ShowMoreView extends LinearLayout implements View.OnClickListener,RadioGroup.OnCheckedChangeListener {
+public class ShowMoreView extends LinearLayout implements RadioGroup.OnCheckedChangeListener {
 
     private  Context context;
     private SeekBar seekLight;
     private SeekBar seekVoice;
-    private TextView tvDonwload;
-    private TextView tvCastScreen;
-    private TextView tvBarrage;
     private RadioGroup rgSpeed;
     private  AliyunShowMoreValue moreValue;
-    private OnDownloadButtonClickListener mOnDownloadButtonClickListener;
     private OnSpeedCheckedChangedListener mOnSpeedCheckedChangedListener;
     private OnLightSeekChangeListener mOnLightSeekChangeListener;
     private OnVoiceSeekChangeListener mOnVoiceSeekChangeListener;
-    private OnScreenCastButtonClickListener mOnScreenCastButtonClickListener;
-    private OnBarrageButtonClickListener mOnBarrageButtonClickListener;
 
-    public ShowMoreView(AliyunPlayerSkinActivity context, AliyunShowMoreValue moreValue) {
+    public ShowMoreView(Activity context, AliyunShowMoreValue moreValue) {
         super(context);
         this.context = context;
         this.moreValue = moreValue;
@@ -47,9 +42,9 @@ public class ShowMoreView extends LinearLayout implements View.OnClickListener,R
     private void findAllViews(View view) {
         seekLight = view.findViewById(R.id.seek_light);
         seekVoice = view.findViewById(R.id.seek_voice);
-        tvDonwload = view.findViewById(R.id.tv_download);
-        tvCastScreen = view.findViewById(R.id.tv_cast_screen);
-        tvBarrage = view.findViewById(R.id.tv_barrage);
+//        tvDonwload = view.findViewById(R.id.tv_download);
+//        tvCastScreen = view.findViewById(R.id.tv_cast_screen);
+//        tvBarrage = view.findViewById(R.id.tv_barrage);
         rgSpeed = findViewById(R.id.alivc_rg_speed);
         configViews();
         addListener();
@@ -81,9 +76,9 @@ public class ShowMoreView extends LinearLayout implements View.OnClickListener,R
 
 
     private void addListener() {
-        tvDonwload.setOnClickListener(this);
-        tvCastScreen.setOnClickListener(this);
-        tvBarrage.setOnClickListener(this);
+//        tvDonwload.setOnClickListener(this);
+//        tvCastScreen.setOnClickListener(this);
+//        tvBarrage.setOnClickListener(this);
 
         rgSpeed.setOnCheckedChangeListener(this);
 
@@ -134,68 +129,11 @@ public class ShowMoreView extends LinearLayout implements View.OnClickListener,R
         });
     }
 
-
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        if (id == R.id.tv_download) {
-            // 下载
-            if (mOnDownloadButtonClickListener != null) {
-                mOnDownloadButtonClickListener.onDownloadClick();
-            }
-        } else if (id == R.id.tv_cast_screen) {
-            // 投屏
-            if (mOnScreenCastButtonClickListener != null) {
-                mOnScreenCastButtonClickListener.onScreenCastClick();
-            }
-
-        } else if (id == R.id.tv_barrage) {
-            // 弹幕
-            if (mOnBarrageButtonClickListener != null) {
-                mOnBarrageButtonClickListener.onBarrageClick();
-            }
-        }
-
-    }
-
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         if (mOnSpeedCheckedChangedListener != null) {
             mOnSpeedCheckedChangedListener.onSpeedChanged(group, checkedId);
         }
-    }
-
-    public interface OnDownloadButtonClickListener {
-        /**
-         * 下载按钮点击
-         */
-        void onDownloadClick();
-    }
-
-    public void setOnDownloadButtonClickListener(OnDownloadButtonClickListener listener) {
-        this.mOnDownloadButtonClickListener = listener;
-    }
-
-    public interface OnScreenCastButtonClickListener {
-        /**
-         * 投屏按钮点击
-         */
-        void onScreenCastClick();
-    }
-
-    public void setOnScreenCastButtonClickListener(OnScreenCastButtonClickListener listener) {
-        this.mOnScreenCastButtonClickListener = listener;
-    }
-
-    public interface OnBarrageButtonClickListener {
-        /**
-         * 弹幕按钮点击
-         */
-        void onBarrageClick();
-    }
-
-    public void setOnBarrageButtonClickListener(OnBarrageButtonClickListener listener) {
-        this.mOnBarrageButtonClickListener = listener;
     }
 
     public interface OnSpeedCheckedChangedListener {

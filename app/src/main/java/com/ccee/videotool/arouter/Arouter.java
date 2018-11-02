@@ -23,14 +23,14 @@ public class Arouter {
                 .withOptionsCompat(ActivityOptionsCompat.makeSceneTransitionAnimation(StackManager.getInstance().getCurrentActivity()))
                 .navigation(StackManager.getInstance().getCurrentActivity());
     }
-    public static void greenNavigation(String path, NavigationCallback callback) {
+    public static void greenNavigationWithOption(String path,NavigationCallback callback) {
         ARouter.getInstance()
                 .build(path)
                 .greenChannel()
                 .withOptionsCompat(ActivityOptionsCompat.makeSceneTransitionAnimation(StackManager.getInstance().getCurrentActivity()))
                 .navigation(StackManager.getInstance().getCurrentActivity(),callback);
     }
-    public static void greenNavigationWithOption(String path, NavigationCallback callback) {
+    public static void greenNavigation(String path, NavigationCallback callback) {
         ARouter.getInstance()
                 .build(path)
                 .greenChannel()
