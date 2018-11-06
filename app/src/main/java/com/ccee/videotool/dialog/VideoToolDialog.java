@@ -47,7 +47,7 @@ public class VideoToolDialog extends BaseDialog {
 
     @Override
     public int getWindowAnimation() {
-        return R.style.dialog_scale_anim;
+        return R.style.dialog_custom;
     }
 
     @Override

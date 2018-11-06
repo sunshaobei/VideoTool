@@ -171,6 +171,14 @@ public class SpUtil {
         return true;
     }
 
+    public int getUserId() {
+        return getInt(SpKey.USER_ID, SpKey.DEFAULE_VALUE_IN);
+    }
+
+    public void saveUserId(int id) {
+        putInt(SpKey.USER_ID, id);
+    }
+
     public String getToken() {
         return getString(SpKey.TOKEN);
     }
@@ -217,5 +225,6 @@ public class SpUtil {
         saveExpiresAt(0);
         saveSupplier_title("");
         saveSupplier_account("");
+        saveUserId(0);
     }
 }

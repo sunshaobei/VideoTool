@@ -88,6 +88,7 @@ public class SplashActivity extends BaseActivity implements Handler.Callback, Ba
         switch (msg.what) {
             case JUMP_TO_MAIN:
                 if ((int) msg.obj == 0) {
+                    binding.btnJump.setClickable(false);
                     jump2Main();
                 } else {
                     binding.getData().countDown.set(String.format("跳过 %s s", msg.obj.toString()));

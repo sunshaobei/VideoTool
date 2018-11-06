@@ -43,12 +43,12 @@ public abstract class BaseActivity extends SwipeBackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (needCustomStatusbar()){
+        if (needCustomStatusbar()) {
             StatusBarUtil.darkMode(this, Color.TRANSPARENT, 0.2f, isStatusBarTextDackColor());
         }
     }
 
-    protected boolean needCustomStatusbar(){
+    protected boolean needCustomStatusbar() {
         return true;
     }
 
@@ -59,7 +59,6 @@ public abstract class BaseActivity extends SwipeBackActivity {
             getWindow().setSoftInputMode(overrideSoftInput());
         }
         setContentView(LayoutInflater.from(this).inflate(layoutResID, null));
-
     }
 
     @Override
@@ -99,15 +98,8 @@ public abstract class BaseActivity extends SwipeBackActivity {
 
 
     public void showLoadingDialog(String str) {
-        if (sweetAlertDialog == null) {
-            sweetAlertDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
-            sweetAlertDialog.setTitleText(str).show();
-        } else {
-            sweetAlertDialog.setTitleText(str).changeAlertType(SweetAlertDialog.PROGRESS_TYPE);
-            if (!sweetAlertDialog.isShowing())
-                sweetAlertDialog.show();
-        }
-
+        sweetAlertDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        sweetAlertDialog.setTitleText(str).show();
     }
 
     /**
@@ -199,8 +191,9 @@ public abstract class BaseActivity extends SwipeBackActivity {
     public void showLoadingView() {
         showLoadingView(Color.WHITE);
     }
+
     public void showTranslucentLoadingView() {
-        showLoadingView(ContextCompat.getColor(this,R.color.thrity_transparency));
+        showLoadingView(ContextCompat.getColor(this, R.color.thrity_transparency));
     }
 
     public void showLoadingView(int color) {

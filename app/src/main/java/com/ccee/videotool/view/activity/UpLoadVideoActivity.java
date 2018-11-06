@@ -13,6 +13,7 @@ import com.ccee.videotool.constants.CCEEConstants;
 import com.ccee.videotool.dialog.VideoToolDialog;
 import com.ccee.videotool.event.VideoDeleteListener;
 import com.ccee.videotool.event.VideoSaveDraftListener;
+import com.ccee.videotool.event.VideoUpLoadSuccessListener;
 import com.ccee.videotool.event.VideoUpdateListener;
 import com.ccee.videotool.greendao.GreenDaoManager;
 import com.ccee.videotool.model.entities.request.AddVideoRequest;
@@ -60,8 +61,9 @@ public class UpLoadVideoActivity extends VideoActivity implements UpLoadManager.
         if (!checkError()) return;
         String localImg = dbVideo.getLocalImg();
         File file = new File(localImg);
-        if (!file.exists())localImg = BitmapUtils.fetchVideoThum(CCEEConstants.PATH,dbVideo.getLocalPath());
-        UpLoadManager.getInstance().upLoad(dbVideo.getLocalPath(),localImg);
+        if (!file.exists())
+            localImg = BitmapUtils.fetchVideoThum(CCEEConstants.PATH, dbVideo.getLocalPath());
+        UpLoadManager.getInstance().upLoad(dbVideo.getLocalPath(), localImg);
     }
 
     @Override
@@ -72,7 +74,7 @@ public class UpLoadVideoActivity extends VideoActivity implements UpLoadManager.
         request.setCoverImgUrl(image);
         request.setDescription(dbVideo.getDescription());
         request.setScale(1);
-        request.setDuration(dbVideo.getDuration());
+        request.setDuration(dbVideo.getDuration() / 1000);
         request.setSize(size);
         request.setAliVideoId(videoId);
         List<Integer> list = new ArrayList<>();
@@ -86,7 +88,8 @@ public class UpLoadVideoActivity extends VideoActivity implements UpLoadManager.
                     successDialog("提交成功");
                     new Handler().postDelayed(() -> {
                         dismissLoadingDialog();
-                        RxBus.getDefault().post(new VideoUpdateListener.UpdateVideo());
+                        RxBus.getDefault().post(new VideoUpLoadSuccessListener.UpLoadSuccess());
+                        GreenDaoManager.getInstance().getDaoSession().getDBVideoDao().deleteByKey(dbVideo.getId());
                         finish();
                     }, 1000);
                 } else {

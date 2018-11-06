@@ -18,6 +18,7 @@ import com.ccee.videotool.arouter.Arouter;
 import com.ccee.videotool.arouter.RoutePath;
 import com.ccee.videotool.databinding.ActivityLoginBinding;
 import com.ccee.videotool.dialog.ForgetPswDialog;
+import com.ccee.videotool.greendao.GreenDaoManager;
 import com.ccee.videotool.model.entities.request.LoginRequest;
 import com.ccee.videotool.model.entities.response.LoginBean;
 import com.ccee.videotool.model.http.Api;
@@ -46,6 +47,7 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingContentView(R.layout.activity_login);
         initView();
+        GreenDaoManager.clearInstance();
     }
 
     private void initView() {
@@ -106,8 +108,10 @@ public class LoginActivity extends BaseActivity {
                     SpUtil.getInstance().saveToken(response.getData().getAccess_token());
                     SpUtil.getInstance().saveSupplier_account(response.getData().getSupplier_account());
                     SpUtil.getInstance().saveExpiresAt(response.getData().getExpires_at());
+                    SpUtil.getInstance().saveUserId(response.getData().getSupplier_id());
                     new Handler().postDelayed(() -> {
                         Arouter.navigation(RoutePath.MAIN);
+                        finish();
                     }, 1000);
                 } else {
                     errorDialog(response.getMessage());

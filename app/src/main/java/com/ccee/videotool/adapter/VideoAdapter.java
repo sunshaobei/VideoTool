@@ -23,7 +23,6 @@ public class VideoAdapter extends CommonAdapter {
 
     public VideoAdapter(Context context, List datas) {
         super(context, R.layout.item_video, datas);
-        setEmptyView("暂无审核通知", R.mipmap.icon_empty);
     }
 
     @Override

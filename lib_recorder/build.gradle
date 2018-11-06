@@ -20,18 +20,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    repositories {
+        flatDir { dirs 'libs' }
+    }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api (project(':AliyunSnap:snap_core')) {
-        transitive = false
-    }
-
-
+    compile(name: 'QuSdk-RC', ext: 'aar')
     implementation externalAndroidAppCompatV7ToSnapSvideo//externalAndroidAppCompatV7
     implementation externalAndroidDesign
-
     implementation externalJSR305
     api externalGlide
     implementation externalAndroidSupportV4

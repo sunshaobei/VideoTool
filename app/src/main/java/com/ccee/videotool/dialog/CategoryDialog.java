@@ -83,18 +83,27 @@ public class CategoryDialog extends BaseDialogFragment {
             }
             ids.add(o.getCategoryId());
             categoryMenRightAdapter.notifyDataSetChanged();
-            StringBuffer sb = null;
+            List<String> list = null;
             for (CategoryBean menuLeftData : menuLeftDatas) {
-                sb = new StringBuffer("");
+                list = new ArrayList<>();
                 boolean[] find = {false};
-                fetchCategoryStr(o.getCategoryId(), sb, menuLeftData, find);
+                list.add(menuLeftData.getTitle());
+                fetchCategoryStr(o.getCategoryId(), list, menuLeftData, find);
                 if (find[0]) break;
-                else {
-                    sb = new StringBuffer("");
-                }
+                list.clear();
+
             }
-            if (selectedListener != null)
+            if (selectedListener != null) {
+                StringBuffer sb = new StringBuffer("");
+                for (String s : list) {
+                    if (TextUtils.isEmpty(sb.toString())) {
+                        sb.append(s);
+                    } else {
+                        sb.append(">").append(s);
+                    }
+                }
                 selectedListener.onSelected(o.getCategoryId(), sb.toString());
+            }
             dismiss();
         });
 
@@ -105,6 +114,7 @@ public class CategoryDialog extends BaseDialogFragment {
                     List<CategoryBean> data = response.getData().getData();
                     for (CategoryBean datum : data) {
                         ids.clear();
+                        ids.add(datum.getCategoryId());
                         boolean[] find = {false};
                         fetchCategoryIds(categoryId, ids, datum, find);
                         if (find[0]) break;
@@ -136,31 +146,34 @@ public class CategoryDialog extends BaseDialogFragment {
         setCanceledOnTouchOutside(true);
     }
 
-    private void fetchCategoryStr(int categoryId, StringBuffer sb, CategoryBean data, boolean[] find) {
-        if (TextUtils.isEmpty(sb.toString())) {
-            sb.append(data.getTitle());
-        } else {
-            sb.append(">").append(data.getTitle());
-        }
+    private void fetchCategoryStr(int categoryId, List<String> list, CategoryBean data, boolean[] find) {
         if (data.getCategoryId() == categoryId) {
             find[0] = true;
         } else if (data.getSubCategorys().size() > 0) {
             for (CategoryBean categoryBean : data.getSubCategorys()) {
-                fetchCategoryStr(categoryId, sb, categoryBean, find);
+                List<String> objects = new ArrayList<>();
+                objects.addAll(list);
+                list.add(categoryBean.getTitle());
+                fetchCategoryStr(categoryId, list, categoryBean, find);
                 if (find[0]) break;
+                list.clear();
+                list.addAll(objects);
             }
         }
     }
 
     private void fetchCategoryIds(int categoryId, List<Integer> ids, CategoryBean data, boolean[] find) {
-        ids.add(data.getCategoryId());
-
         if (data.getCategoryId() == categoryId) {
             find[0] = true;
         } else if (data.getSubCategorys().size() > 0) {
             for (CategoryBean categoryBean : data.getSubCategorys()) {
+                List<Integer> objects = new ArrayList<>();
+                objects.addAll(ids);
+                ids.add(categoryBean.getCategoryId());
                 fetchCategoryIds(categoryId, ids, categoryBean, find);
                 if (find[0]) break;
+                ids.clear();
+                ids.addAll(objects);
             }
         }
     }

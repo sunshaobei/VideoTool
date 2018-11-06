@@ -113,8 +113,6 @@
     public void *(android.webkit.WebView, jav.lang.String);
 }
 
-
-
 #--------------------路由----------------------------------------------
 -keep public class com.alibaba.android.arouter.routes.**{*;}
 -keep class * implements com.alibaba.android.arouter.facade.template.ISyringe{*;}
@@ -130,6 +128,14 @@
 -keep class com.ccee.videotool.model**{*;}
 -keep class com.sunsh.baselibrary.http.ok3.entity**{*;}
 -keep class com.sunsh.baselibrary.widgets.pickview.citypickerview.bean**{*;}
+-ignorewarnings
+
+-keep class com.alivc.component.encoder**{*;}
+-keep class com.a**{*;}
+-keep class com.aliyun**{*;}
+-keep class com.duanqu**{*;}
+-keep class com.qu**{*;}
+-keep class com.sunsh.baselibrary.sweetdialog.Rotate3dAnimation**{*;}
 
 
 #---------------------------------微信------------------------------------
@@ -149,6 +155,48 @@
 -dontwarn com.alibaba.fastjson.**
 -keep class com.alibaba.fastjson.** { *; }
 #------------------------------end---------------------
+
+#--------------------------------retrofit-----------------------
+# Platform calls Class.forName on types which do not exist on Android to determine platform.
+-dontnote retrofit2.Platform
+# Platform used when running on RoboVM on iOS. Will not be used at runtime.
+-dontnote retrofit2.Platform$IOS$MainThreadExecutor
+# Platform used when running on Java 8 VMs. Will not be used at runtime.
+-dontwarn retrofit2.Platform$Java8
+# Retain generic type information for use by reflection by converters and adapters.
+-keepattributes Signature
+# Retain declared checked exceptions for use by a Proxy instance.
+-keepattributes Exceptions
+#----------------------------------end----------------------
+
+##---------------Begin: proguard configuration for Gson  ----------
+# Gson uses generic type information stored in a class file when working with fields. Proguard
+# removes such information by default, so configure it to keep all of it.
+
+
+# Gson specific classes
+-keep class sun.misc.Unsafe { *; }
+#-keep class com.google.gson.stream.** { *; }
+# Application classes that will be serialized/deserialized over Gson
+-keep class com.google.gson.examples.android.model.** { *; }
+##---------------End: proguard configuration for Gson  ----------
+
+
+#glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+
+#--------------------ok3---------------------
+-keep class com.squareup.okhttp.** { *;}
+-dontwarn com.squareup.okhttp.**
+-dontwarn okio.**
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+-dontwarn okhttp3.**
+#-------------------end-------------------
 
 # Keep our interfaces so they can be used by other ProGuard rules.
 # See http://sourceforge.net/p/proguard/bugs/466/

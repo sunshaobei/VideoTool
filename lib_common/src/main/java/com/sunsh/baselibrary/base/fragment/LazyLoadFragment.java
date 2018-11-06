@@ -73,9 +73,9 @@ public abstract class LazyLoadFragment extends BaseFragment {
 
     private void lazyLoad() {
         if (isViewCreated && isUIVisible && isFirstLoad) {
-            isFirstLoad = false;
             initUi();
             loadData();
+            isFirstLoad = false;
         }
     }
 

@@ -12,4 +12,5 @@ public interface SpKey {
     String SUPPLIER_ACCOUTN = "supplier_account";
     String LONGITUDE = "longitude";
     String LATITUDE = "latitude";
+    String USER_ID = "supplier_id";
 }

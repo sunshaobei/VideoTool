@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\Users\sunsh\Desktop\VideoTool\lib_recorder\src\main\assets"><file name="AliyunDemo/filter.zip" path="C:\Users\sunsh\Desktop\VideoTool\lib_recorder\src\main\assets\AliyunDemo\filter.zip"/></source><source path="C:\Users\sunsh\Desktop\VideoTool\gradle-build\lib_recorder\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="C:\Users\sunsh\Desktop\VideoTool\lib_recorder\src\release\assets"/></dataSet></merger>

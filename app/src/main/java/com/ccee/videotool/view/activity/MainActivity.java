@@ -29,6 +29,8 @@ import com.ccee.videotool.R;
 import com.ccee.videotool.adapter.MainPagerAdapter;
 import com.ccee.videotool.arouter.RoutePath;
 import com.ccee.videotool.constants.CCEEConstants;
+import com.ccee.videotool.event.Swipe2RefreshListener;
+import com.ccee.videotool.greendao.GreenDaoManager;
 import com.ccee.videotool.model.db.DBVideo;
 import com.ccee.videotool.model.entities.request.BaseConfigRequest;
 import com.ccee.videotool.model.entities.response.ConfigBean;
@@ -39,6 +41,7 @@ import com.ccee.videotool.view.fragment.VideoLibFragment;
 import com.sunsh.baselibrary.base.activity.BaseActivity;
 import com.sunsh.baselibrary.http.ok3.entity.HttpCallBack;
 import com.sunsh.baselibrary.http.ok3.entity.HttpResponse;
+import com.sunsh.baselibrary.rxbus.RxBus;
 import com.sunsh.baselibrary.utils.AppUtils;
 import com.sunsh.baselibrary.utils.BitmapUtils;
 import com.sunsh.baselibrary.utils.NotificationsUtils;
@@ -61,12 +64,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private long exitTime;
     private boolean isEnterAnimationComplete;
     private static final int REQUEST_RECORD = 100;
+    private long leftClickTime;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        GreenDaoManager.getInstance().init(getApplication());
         initView();
         UpdateActivity.checkUpdate(this);
         NotificationsUtils.openNotifyPermission(this);
@@ -80,7 +85,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         var3.putExtra("record_mode", AliyunSnapVideoParam.RECORD_MODE_AUTO);
         var3.putExtra("beauty_level", 80);
         var3.putExtra("beauty_status", true);
-        var3.putExtra("camera_type", CameraType.FRONT);
+        var3.putExtra("camera_type", CameraType.BACK);
         var3.putExtra("falsh_type", FlashType.ON);
         var3.putExtra("need_clip", true);
         var3.putExtra("max_duration", 120000);
@@ -120,13 +125,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             default:
                 break;
             case R.id.linear_video:
-                if (mLinearVideo.isSelected()) {
-                    videoLibFragment.refresh();
+                int currentItem = vp.getCurrentItem();
+                if (currentItem == 0 && System.currentTimeMillis() - leftClickTime < 200) {
+                    RxBus.getDefault().post(new Swipe2RefreshListener.Swipe());
                 } else {
-                    mLinearVideo.setSelected(true);
-                    mLinearMine.setSelected(false);
-                    vp.setCurrentItem(0);
+                    if (mLinearVideo.isSelected()) {
+                        videoLibFragment.refresh();
+                    } else {
+                        mLinearVideo.setSelected(true);
+                        mLinearMine.setSelected(false);
+                        vp.setCurrentItem(0);
+                    }
                 }
+                leftClickTime = System.currentTimeMillis();
                 break;
             case R.id.linear_mine:
                 if (mLinearMine.isSelected()) {

@@ -9,11 +9,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
-            }
-        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -66,7 +61,5 @@ dependencies {
     api 'com.zzhoujay.richtext:richtext:3.0.7'
     api 'com.zzhoujay:html:1.0.1'
     api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
-
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
 }

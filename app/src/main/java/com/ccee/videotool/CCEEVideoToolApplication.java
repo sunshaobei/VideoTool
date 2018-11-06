@@ -17,7 +17,6 @@ public class CCEEVideoToolApplication extends BaseApplication {
 //        AuthInfo mAuthInfo = new AuthInfo(this, AppIdConstants.WB_APP_KEY,
 //                AppIdConstants.REDIRECT_URL, AppIdConstants.SCOPE);
 //        WbSdk.install(this, mAuthInfo);
-        GreenDaoManager.getInstance().init(this);
         AliVcMediaPlayer.init(getApplicationContext());
     }
 

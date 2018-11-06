@@ -8,6 +8,7 @@ import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.callback.NavigationCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.sunsh.baselibrary.R;
+import com.sunsh.baselibrary.utils.ToastUtils;
 import com.sunsh.baselibrary.widgets.swipeback.StackManager;
 
 import java.io.IOException;
@@ -23,6 +24,7 @@ public class LoginIntercepter implements Interceptor {
         Response response = chain.proceed(request);
         int code = response.code();
         if (code == 401) {
+            ToastUtils.showShortToastSafe("Token过期,请重新登录");
             Postcard build = ARouter.getInstance()
                     .build("/app/login")
                     .greenChannel();

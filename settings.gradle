@@ -1,9 +1,6 @@
-include ':Aliyunplayer:AlivcPlayer'
-include ':Aliyunplayer:AlivcReporter'
 include ':zxing'
-include ':Aliyunplayer:player_demo'
+include ':player_demo'
 include ':lib_recorder'
-include ':AliyunSnap:snap_core'
 include ':lib_common'
 include ':app'
 

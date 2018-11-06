@@ -31,17 +31,17 @@ android {
 
     signingConfigs {
         debug {
-            File strFile = new File("../CCEEVideoTool.jks")
+            File strFile = new File("../CCEEVideoTool.keystore")
             storeFile file(strFile)
             storePassword "cceevideotool"
-            keyAlias "cceevideotool"
+            keyAlias "CCEEVideoTool"
             keyPassword "cceevideotool"
         }
         release {
-            File strFile = new File("../CCEEVideoTool.jks")
+            File strFile = new File("../CCEEVideoTool.keystore")
             storeFile file(strFile)
             storePassword "cceevideotool"
-            keyAlias "cceevideotool"
+            keyAlias "CCEEVideoTool"
             keyPassword "cceevideotool"
         }
     }
@@ -77,6 +77,13 @@ android {
         targetGenDir 'src/main/java'
     }
 
+
+    repositories {
+        flatDir {
+            dirs project(':lib_recorder').file('libs')
+            dirs project(':player_demo').file('arrs')
+        }
+    }
 }
 
 configurations.all {
@@ -89,7 +96,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation externalAndroidAppCompatV7
     implementation project(':lib_recorder')
-    implementation project(':Aliyunplayer:player_demo')
+    implementation project(':player_demo')
     implementation project(':lib_common')
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     implementation 'com.sina.weibo.sdk:core:4.3.0:openDefaultRelease@aar'
@@ -97,8 +104,5 @@ dependencies {
     implementation 'com.liulishuo.filedownloader:library:1.6.9'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
-    implementation files('libs/libs/open_sdk_r5756.jar')
 }

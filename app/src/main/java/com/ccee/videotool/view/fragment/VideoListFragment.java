@@ -45,6 +45,7 @@ public abstract class VideoListFragment extends LazyLoadFragment implements Over
     protected OverScrollLayout overScrollLayout;
     protected VideoListRequest request;
     protected int page = 1;
+    protected int count;
 
     @Override
     protected int getLayoutId() {
@@ -58,6 +59,19 @@ public abstract class VideoListFragment extends LazyLoadFragment implements Over
         OverScrollUtils.defaultConfig2(overScrollLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         videoAdapter = new VideoAdapter(getContext(), datas);
+        String emptytext = null;
+        if (getVideoType() == null) {
+            emptytext = "暂无视频";
+        } else if (getVideoType() == -1) {
+            emptytext = "暂无草稿";
+        } else if (getVideoType() == CHECK_PENDING) {
+            emptytext = "暂无待审核视频";
+        } else if (getVideoType() == PUBLISHED) {
+            emptytext = "暂无已发布视频";
+        } else if (getVideoType() == FAILED) {
+            emptytext = "暂无未通过视频";
+        }
+        videoAdapter.setEmptyView(emptytext, R.mipmap.icon_empty);
         recyclerView.setAdapter(videoAdapter);
         overScrollLayout.setOnRefreshListener(this);
         videoAdapter.setOnItemClickListener(this);
@@ -101,10 +115,8 @@ public abstract class VideoListFragment extends LazyLoadFragment implements Over
                     page = 2;
                     datas.clear();
                     datas.addAll(response.getData().getData());
-                    if (getVideoType() == null) {
-                        RxBus.getDefault().post(new AllvideoListener.AllVideo(response.getData().getCount()));
-                    }
-
+                    count = response.getData().getCount();
+                    RxBus.getDefault().post(new AllvideoListener.AllVideo(response.getData().getCount(), getVideoType()));
                 } else {
                     ToastUtils.showShortToast(response.getMessage());
                 }
@@ -145,8 +157,23 @@ public abstract class VideoListFragment extends LazyLoadFragment implements Over
                 overScrollLayout.loadMoreComplete();
             }
         });
+    }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            RxBus.getDefault().post(new AllvideoListener.AllVideo(getCount(), getVideoType()));
+        }
+    }
+
+    protected int getCount() {
+        return count;
     }
 
     protected abstract Integer getVideoType();
+
+    public void swipe() {
+        overScrollLayout.startRefresh();
+    }
 }

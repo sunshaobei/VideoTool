@@ -81,7 +81,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         setCanceledOnTouchOutside(false);
         mProgressHelper = new ProgressHelper(context);
         mAlertType = alertType;
-        mErrorInAnim = OptAnimationLoader.loadAnimation(getContext(),R.anim.error_frame_in);
+        mErrorInAnim = OptAnimationLoader.loadAnimation(getContext(), R.anim.error_frame_in);
         mErrorXInAnim = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(), R.anim.error_x_in);
         // 2.3.x system don't support alpha-animation on layer-list drawable
         // remove it from animation set
@@ -358,6 +358,8 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         AlphaAnimation alphaAnimation = new AlphaAnimation(1f, 0.6f);
         alphaAnimation.setDuration(150);
         animationSet.addAnimation(scaleAnimation);
+        animationSet.setFillAfter(false);
+        animationSet.setFillBefore(true);
         mDialogView.startAnimation(animationSet);
     }
 

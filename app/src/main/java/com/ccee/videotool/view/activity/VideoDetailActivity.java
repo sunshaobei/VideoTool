@@ -156,13 +156,13 @@ public class VideoDetailActivity extends BaseBarActivity implements AliyunVodPla
                 .setContent("确定删除该视频？")
                 .setPositive("确定", v -> {
                     showLoadingDialog("删除中...");
-                    OkHttpUtils.delete().url(Api.VIDEO_DELETE + "?auditId=" + 0).headers(HttpManager.getHeaders()).build().execute(new HttpCallBack<HttpResponse>() {
+                    OkHttpUtils.delete().url(Api.VIDEO_DELETE + "?auditId=" + auditId).headers(HttpManager.getHeaders()).build().execute(new HttpCallBack<HttpResponse>() {
                         @Override
                         public void onResponse(HttpResponse response, int id) {
                             if (response.isResult()) {
                                 RxBus.getDefault().post(new VideoDeleteListener.DeleteVideo(auditId));
                                 successDialog("删除成功");
-                                view.postDelayed(()->onBackPressed(),1000);
+                                view.postDelayed(()->finish(),1000);
                             } else {
                                 errorDialog(response.getMessage());
                             }

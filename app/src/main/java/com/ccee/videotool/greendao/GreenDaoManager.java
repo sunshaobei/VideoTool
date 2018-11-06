@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.ccee.videotool.model.dbdao.DaoMaster;
 import com.ccee.videotool.model.dbdao.DaoSession;
+import com.sunsh.baselibrary.utils.sp.SpUtil;
 
 
 /**
@@ -11,8 +12,6 @@ import com.ccee.videotool.model.dbdao.DaoSession;
  */
 
 public class GreenDaoManager {
-    //创建数据库的名字
-    private static final String DB_NAME = "CCEEVideo.db";
     //初始化上下文
     private Context context;
     //多线程中要被共享的使用volatile关键字修饰  GreenDao管理类
@@ -23,6 +22,13 @@ public class GreenDaoManager {
     private static SLOpenHelper mHelper;
     //管理gen里生成的所有的Dao对象里边带有基本的增删改查的方法
     private static DaoSession mDaoSession, localDaoSession;
+
+
+    public static void clearInstance() {
+        mInstance = null;
+        mDaoMaster = null;
+        closeConnection();
+    }
 
     /**
      * 单例模式获得操作数据库对象
@@ -56,13 +62,17 @@ public class GreenDaoManager {
         if (mDaoMaster == null) {
             synchronized (GreenDaoManager.class) {
                 if (mDaoMaster == null) {
-                    mHelper = new SLOpenHelper(context, DB_NAME, null);
+                    mHelper = new SLOpenHelper(context, getDbName(SpUtil.getInstance().getUserId()), null);
                     mDaoMaster = new DaoMaster(mHelper.getWritableDatabase());
                 }
             }
 
         }
         return mDaoMaster;
+    }
+
+    private String getDbName(int id) {
+        return id + "CCEEVideo.db";
     }
 
     /**
@@ -86,19 +96,19 @@ public class GreenDaoManager {
     /**
      * 关闭所有的操作，数据库开启后，使用完毕要关闭
      */
-    public void closeConnection() {
+    public static void closeConnection() {
         closeHelper();
         closeDaoSession();
     }
 
-    public void closeHelper() {
+    public static void closeHelper() {
         if (mHelper != null) {
             mHelper.close();
             mHelper = null;
         }
     }
 
-    public void closeDaoSession() {
+    public static void closeDaoSession() {
         if (mDaoSession != null) {
             mDaoSession.clear();
             mDaoSession = null;

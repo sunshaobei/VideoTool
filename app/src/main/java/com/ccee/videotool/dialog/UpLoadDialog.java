@@ -34,8 +34,10 @@ public class UpLoadDialog extends BaseDialogFragment {
     }
 
     public void setProgress(float progress) {
-        DecimalFormat decimalFormat = new DecimalFormat("00.00");
-        tv_progress.setText("上传中("+decimalFormat.format(progress)+"%)\n 请耐心等待");
+        tv_progress.post(()->{
+            DecimalFormat decimalFormat = new DecimalFormat("00.00");
+            tv_progress.setText("上传中("+decimalFormat.format(progress)+"%)\n  请耐心等待");
+        });
     }
 
     public void setText(String s) {

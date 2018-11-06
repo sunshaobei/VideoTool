@@ -10,6 +10,7 @@ import com.alibaba.android.arouter.facade.callback.NavigationCallback;
 import com.ccee.videotool.R;
 import com.ccee.videotool.arouter.Arouter;
 import com.ccee.videotool.arouter.RoutePath;
+import com.ccee.videotool.greendao.GreenDaoManager;
 import com.sunsh.baselibrary.utils.sp.SpUtil;
 import com.sunsh.baselibrary.widgets.swipeback.StackManager;
 
@@ -21,7 +22,7 @@ public class LoginOutDialog extends VideoToolDialog {
     @Override
     protected void initView() {
         super.initView();
-        setPositive(getContext().getResources().getString(R.string.confirm),v->{
+        setPositive(getContext().getResources().getString(R.string.confirm), v -> {
             SpUtil.getInstance().clearSp4LoginOut();
             Arouter.greenNavigationWithOption(RoutePath.LOGIN, new NavigationCallback() {
 
@@ -46,7 +47,7 @@ public class LoginOutDialog extends VideoToolDialog {
                                 indexActivity.overridePendingTransition(R.anim.no_anim, R.anim.no_anim);
                             }
                         }
-                    },1000);
+                    }, 1000);
                 }
 
                 @Override
@@ -55,7 +56,7 @@ public class LoginOutDialog extends VideoToolDialog {
                 }
             });
             dismiss();
-        }).setNegative(getContext().getResources().getString(R.string.cancle),v->dismiss())
+        }).setNegative(getContext().getResources().getString(R.string.cancle), v -> dismiss())
                 .setTitle(getContext().getResources().getString(R.string.tip))
                 .setContent(getContext().getResources().getString(R.string.login_out_des));
     }

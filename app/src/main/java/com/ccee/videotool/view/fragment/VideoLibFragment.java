@@ -11,6 +11,7 @@ import com.ccee.videotool.R;
 import com.ccee.videotool.arouter.Arouter;
 import com.ccee.videotool.arouter.RoutePath;
 import com.ccee.videotool.event.AllvideoListener;
+import com.ccee.videotool.event.Swipe2RefreshListener;
 import com.ccee.videotool.event.VideoDeleteListener;
 import com.ccee.videotool.event.VideoSaveDraftListener;
 import com.ccee.videotool.event.VideoUpLoadSuccessListener;
@@ -33,7 +34,8 @@ public class VideoLibFragment extends VideoToolFragment implements View.OnClickL
         , VideoDeleteListener
         , VideoUpdateListener
         , VideoSaveDraftListener
-        , VideoUpLoadSuccessListener {
+        , VideoUpLoadSuccessListener
+        , Swipe2RefreshListener {
 
 
     private SlidingTabLayout tabLayout;
@@ -113,6 +115,16 @@ public class VideoLibFragment extends VideoToolFragment implements View.OnClickL
     @Subscribe
     @Override
     public void allVideo(AllVideo allVideo) {
+        if (allVideo.getType() == null && viewPager.getCurrentItem() == 0) {
+        } else if (allVideo.getType() != null) {
+            if (allVideo.getType() == -1 && viewPager.getCurrentItem() == 1) {
+            } else if (allVideo.getType() == 1 && viewPager.getCurrentItem() == 2) {
+            } else if (allVideo.getType() == 2 && viewPager.getCurrentItem() == 3) {
+            } else if (allVideo.getType() == 3 && viewPager.getCurrentItem() == 4) {
+            } else {
+                return;
+            }
+        } else return;
         tv_mine_video.setText(String.format("我的视频 %s", allVideo.getCount()));
     }
 
@@ -132,9 +144,9 @@ public class VideoLibFragment extends VideoToolFragment implements View.OnClickL
         for (Fragment fragment : fragments) {
             if (fragment instanceof VideoListFragment) {
                 ((VideoListFragment) fragment).onRefresh();
-                viewPager.setCurrentItem(o.getType());
             }
         }
+        viewPager.setCurrentItem(o.getType());
     }
 
     @Subscribe
@@ -149,9 +161,18 @@ public class VideoLibFragment extends VideoToolFragment implements View.OnClickL
 
     @Override
     public void onUpLoadSuccess(UpLoadSuccess o) {
-        Fragment fragment = fragments.get(1);
-        if (fragment instanceof VideoListFragment) {
-            ((VideoListFragment) fragment).onRefresh();
+        viewPager.setCurrentItem(0);
+        for (Fragment fragment : fragments) {
+            if (fragment instanceof VideoListFragment) {
+                ((VideoListFragment) fragment).onRefresh();
+            }
         }
+    }
+
+    @Subscribe
+    @Override
+    public void swipe(Swipe s) {
+        VideoListFragment fragment = (VideoListFragment) fragments.get(viewPager.getCurrentItem());
+        fragment.swipe();
     }
 }

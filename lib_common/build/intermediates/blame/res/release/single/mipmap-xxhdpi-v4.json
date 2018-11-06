@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "C:\\Users\\sunsh\\Desktop\\VideoTool\\lib_common\\build\\intermediates\\res\\merged\\release\\mipmap-xxhdpi-v4\\error.png",
+        "source": "C:\\Users\\sunsh\\Desktop\\VideoTool\\lib_common\\src\\main\\res\\mipmap-xxhdpi\\error.png"
+    },
+    {
+        "merged": "C:\\Users\\sunsh\\Desktop\\VideoTool\\lib_common\\build\\intermediates\\res\\merged\\release\\mipmap-xxhdpi-v4\\rl_arrow_up.png",
+        "source": "C:\\Users\\sunsh\\Desktop\\VideoTool\\lib_common\\src\\main\\res\\mipmap-xxhdpi\\rl_arrow_up.png"
+    },
+    {
+        "merged": "C:\\Users\\sunsh\\Desktop\\VideoTool\\lib_common\\build\\intermediates\\res\\merged\\release\\mipmap-xxhdpi-v4\\rl_arrow_down.png",
+        "source": "C:\\Users\\sunsh\\Desktop\\VideoTool\\lib_common\\src\\main\\res\\mipmap-xxhdpi\\rl_arrow_down.png"
+    },
+    {
+        "merged": "C:\\Users\\sunsh\\Desktop\\VideoTool\\lib_common\\build\\intermediates\\res\\merged\\release\\mipmap-xxhdpi-v4\\ic_edittext_delete.png",
+        "source": "C:\\Users\\sunsh\\Desktop\\VideoTool\\lib_common\\src\\main\\res\\mipmap-xxhdpi\\ic_edittext_delete.png"
+    },
+    {
+        "merged": "C:\\Users\\sunsh\\Desktop\\VideoTool\\lib_common\\build\\intermediates\\res\\merged\\release\\mipmap-xxhdpi-v4\\success.png",
+        "source": "C:\\Users\\sunsh\\Desktop\\VideoTool\\lib_common\\src\\main\\res\\mipmap-xxhdpi\\success.png"
+    },
+    {
+        "merged": "C:\\Users\\sunsh\\Desktop\\VideoTool\\lib_common\\build\\intermediates\\res\\merged\\release\\mipmap-xxhdpi-v4\\ic_back.png",
+        "source": "C:\\Users\\sunsh\\Desktop\\VideoTool\\lib_common\\src\\main\\res\\mipmap-xxhdpi\\ic_back.png"
+    }
+]

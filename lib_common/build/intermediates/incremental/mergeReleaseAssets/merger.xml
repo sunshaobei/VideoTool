@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="C:\Users\sunsh\Desktop\VideoTool\lib_common\src\main\assets"><file name="china_city_data.json" path="C:\Users\sunsh\Desktop\VideoTool\lib_common\src\main\assets\china_city_data.json"/></source><source path="C:\Users\sunsh\Desktop\VideoTool\lib_common\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="C:\Users\sunsh\Desktop\VideoTool\lib_common\src\release\assets"/></dataSet></merger>

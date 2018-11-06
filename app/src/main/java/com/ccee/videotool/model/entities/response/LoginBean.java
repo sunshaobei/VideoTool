@@ -8,7 +8,15 @@ public class LoginBean {
     private String supplier_title;
     private String supplier_logo;
     private String supplier_account;
+    private int supplier_id;
 
+    public int getSupplier_id() {
+        return supplier_id;
+    }
+
+    public void setSupplier_id(int supplier_id) {
+        this.supplier_id = supplier_id;
+    }
 
     public long getExpires_at() {
         return expires_at;

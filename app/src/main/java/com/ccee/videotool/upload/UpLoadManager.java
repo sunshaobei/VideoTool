@@ -22,6 +22,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 
 public class UpLoadManager {
@@ -76,7 +81,7 @@ public class UpLoadManager {
             @Override
             public void onResponse(HttpResponse<UpLoadCoverBean> response, int id) {
                 if (response.isResult()) {
-                    upLoadVideo(videoPahth, response.getData().getUrl());
+                    upLoadVideo(videoPahth, response.getData().getUrl(), imgPath);
                 } else {
                     upLoadDialog.setFailed("封面上传失败");
                 }
@@ -92,17 +97,17 @@ public class UpLoadManager {
 
     private void upLoadImg(String imgPath, HttpCallBack<HttpResponse<UpLoadCoverBean>> callBack) {
         File file = new File(imgPath);
-        HttpManager.postFile(Api.UPLOAD_COVER, file, callBack);
+        OkHttpUtils.post().url(Api.UPLOAD_COVER).headers(HttpManager.getHeaders()).addFile("file", file.getName(), file).build().execute(callBack);
     }
 
-    private void upLoadVideo(String videoPath, String imgUrl) {
+    private void upLoadVideo(String videoPath, String imgUrl, String img) {
         upLoadDialog.setProgress(0);
         upLoadDialog.show();
         getSts(new HttpCallBack<VideoSTSBean>() {
             @Override
             public void onResponse(VideoSTSBean response, int id) {
                 if (response.isResult()) {
-                    upLoadVideo(videoPath, imgUrl, response.getData());
+                    upLoadVideo(videoPath, imgUrl, response.getData(), img);
                 } else {
                     upLoadDialog.setFailed(response.getMessage());
                 }
@@ -126,7 +131,7 @@ public class UpLoadManager {
         });
     }
 
-    private void upLoadVideo(String videoPath, String imgUrl, VideoSTSBean.DataBean dataBean) {
+    private void upLoadVideo(String videoPath, String imgUrl, VideoSTSBean.DataBean dataBean, String img) {
         //参数请确保存在，如不存在SDK内部将会直接将错误throw Exception
         // 文件路径保证存在之外因为Android 6.0之后需要动态获取权限，请开发者自行实现获取"文件读写权限".
         VodHttpClientConfig vodHttpClientConfig = new VodHttpClientConfig.Builder()
@@ -141,6 +146,7 @@ public class UpLoadManager {
 
         VodSessionCreateInfo vodSessionCreateInfo = new VodSessionCreateInfo.Builder()
                 .setVideoPath(videoPath)
+                .setImagePath(img)
                 .setAccessKeyId(dataBean.getAccessKeyId())
                 .setAccessKeySecret(dataBean.getAccessKeySecret())
                 .setSecurityToken(dataBean.getSecurityToken())
@@ -157,12 +163,35 @@ public class UpLoadManager {
             @Override
             public void onUploadSucceed(String videoId, String imageUrl) {
                 Log.e("UpLoad", "onUploadSucceed" + "videoId:" + videoId + "imageUrl" + imageUrl);
-                if (callbacks != null && callbacks.size() > 0) {
-                    for (OnUpLoadSuccessCallback callback : callbacks) {
-                        callback.OnUpLoadSuccess(videoId, totalSize, imgUrl);
+                Observable.just("").observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new Observer<String>() {
+                    private Disposable d;
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        this.d = d;
                     }
-                }
-                upLoadDialog.setSuccess();
+
+                    @Override
+                    public void onNext(String s) {
+                        upLoadDialog.setSuccess();
+                        if (callbacks != null && callbacks.size() > 0) {
+                            for (OnUpLoadSuccessCallback callback : callbacks) {
+                                callback.OnUpLoadSuccess(videoId, totalSize, imgUrl);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        d.dispose();
+
+                    }
+                });
             }
 
             @Override
